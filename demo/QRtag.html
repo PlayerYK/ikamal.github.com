@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<!--
+
+  Created using http://jsbin.com/
+  Source can be edited via http://jsbin.com/uwitew/4/edit
+
+-->
+<head>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <meta charset=utf-8/>
+    <title>QRtag Generator</title>
+    <style type="text/css">
+        body{text-align:center;margin:0;padding:20px 0;font-family:Helvetica, Arial, sans-serif;color:#333;text-shadow:0 1px 0 white;background:#F9F9F9;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);}
+        .round{border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;}
+        #wrapper{margin:0 auto;text-align:left;width:600px;border:1px solid #AAA;background-color:white;padding:20px;}
+        .title{background-color:#1C1C1C;color:#D0D0D0;font:16px Monaco, monospace !important;margin-bottom:30px;padding:15px;}
+        #src{border:solid 1px #BBB;width:580px;padding:10px;height:100px;}
+        #Gen{color:white;font-weight:bold;cursor:pointer;border:none;font-size:18px;padding:11px 48px 13px;background-color:#5B8737;}
+        #Gen:hover, #Gen:focus{background-color:#699C40;}
+        #qrcode{width:310px;}
+        .block,
+        .footer{padding:10px;border:#CCC 1px solid;margin:20px 0;font-size:12px;color:#666;}
+        .footer{background:#EFEFEF;}
+        a{color:#666;text-decoration:none;}
+        a:hover{text-decoration:underline;}
+        #vcard{display:none;}
+        #vcard label{width:120px;text-align:right;float:left;}
+        #vcard input{ margin-left:10px;}
+    </style>
+</head>
+<body>
+<div id="wrapper" class="round">
+        <h1 class="round title">QRtag Generator</h1>
+        <select name="type" id="type">
+            <option value="txt_url">Text/URL</option>
+            <option value="vcard">Card</option>
+        </select>
+    <form id="form">
+        <textarea class="round" id="src"></textarea><br/>
+
+        <div class="round" id="vcard">
+            <div class="line">
+                <label for="N">Name</label><input class="txt" value="kamalyu" type="text" id="N"/>
+            </div>
+            <div class="line">
+                <label for="TITLE">Position</label><input class="txt" value="FD" type="text" id="TITLE"/>
+            </div>
+            <div class="line">
+                <label for="TEL;work;voice">Phone Number</label><input class="txt" value="61714" type="text" id="TEL;work;voice"/>
+            </div>
+            <div class="line">
+                <label for="TEL;home;voice">Mobile</label><input class="txt" value="13826534765" type="text" id="TEL;home;voice"/>
+            </div>
+            <div class="line">
+                <label for="x-qq">QQ</label><input class="txt" value="273799371" type="text" id="x-qq"/>
+            </div>
+            <div class="line">
+                <label for="NOTE">What's UP</label><input class="txt" value="Do or Do not. There is no try." type="text" id="NOTE"/>
+            </div>
+        </div>
+        <input class="round" type="button" id="Gen" value="Generate"/>
+    </form>
+    <div class="block round" id="qrcode"><img
+            src="https://chart.googleapis.com/chart?chs=310x310&cht=qr&chl=http%3A%2F%2Fjslab.pro%2Fdemo%2Fqrtag"
+            alt="http://haipi8.com/demo/qrcode/" title="http://haipi8.com/demo/qrcode/"></div>
+
+    <div class="footer round">
+        2012 &copy; <a href="http://jslab.pro/">jsLab.pro</a> |
+        <a href="https://google-developers.appspot.com/chart/infographics/docs/qr_codes" title="" target="_blank">Google
+            Chart</a>
+    </div>
+</div>
+<script language="javascript">
+    $(function () {
+        $('#type').change(function () {
+            if ($(this).val() == "txt_url") {
+                $('#src').show();
+                $('#vcard').hide();
+            } else {
+                $('#src').hide();
+                $('#vcard').show();
+            }
+        });
+        $('#Gen').click(function () {
+            var str = '';
+            switch ($('#type').val()) {
+                case 'txt_url':
+                    str = $('#src').val();
+                    break;
+                case 'vcard':
+                    str = '';
+                    var chl = [], title, val, i = 0;
+                    var vals = $('#vcard input');
+                    //VCARD格式
+                    chl.push("BEGIN:VCARD\n");
+                    chl.push("VERSION:2.1\n");
+                    for (; i < vals.length; i++) {
+                        title = vals.eq(i).attr('id');
+                        val = $.trim(vals.eq(i).val());
+                        if (title.length > 0 && val.length > 0) {
+                            chl.push(title + ":" + val + "\n");
+                        }
+                    }
+                    chl.push("END:VCARD");
+                    str = chl.join("");
+                    break;
+            }
+            $('#form')[0].reset();
+			if(str == ''){
+				$('#src').focus();
+				return;
+			}
+            gen(str);
+        });
+
+    });
+    function gen(str) {
+        var imgSrc = "https://chart.googleapis.com/chart?chs=310x310&cht=qr&chl=" + encodeURIComponent(str);
+        $('#qrcode').html($('<img title="'+str+'" src="' + imgSrc + '" />'));
+    }
+</script>
+</body>
+</html>
