@@ -5,8 +5,6 @@ tagline: Supporting tagline
 ---
 {% include JB/setup %}
 
-## {{ page.title }}
-
 文章列表
 
 <ul class="posts">
