@@ -15,4 +15,4 @@ title: 又一个技术博客
 demo
 
 - [ascii image]({{ BASE_PATH }}/demo/ascii.html)
-- [ascii image]({{ BASE_PATH }}/demo/qr.html)
+- [Qr Code]({{ BASE_PATH }}/demo/qr.html)
