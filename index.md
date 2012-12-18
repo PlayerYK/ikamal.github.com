@@ -1,7 +1,6 @@
 ---
 layout: page
 title: 又一个技术博客
-tagline: Supporting tagline
 ---
 {% include JB/setup %}
 
@@ -12,3 +11,8 @@ tagline: Supporting tagline
     <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
   {% endfor %}
 </ul>
+
+demo
+
+- [ascii image]({{ BASE_PATH }}/demo/ascii.html)
+- [ascii image]({{ BASE_PATH }}/demo/qr.html)
