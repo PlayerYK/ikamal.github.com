@@ -16,7 +16,9 @@ Underscore有80多个函数，使用Backbone.js时发现了这个精巧的函数
 
 阅读源码时发现我的js基础不是一般的差，下面就是记录我看不懂到看懂的过程。
 
-**each** _.each(list, iterator, \[context\]) Alias: **forEach**
+**each** _.each(list, iterator, \[context\]) 别名: **forEach**
+
+这个方法是Underscore的基石，对每一个元素依次执行指定的操作。
 
 遍历**List**，用其中的每个值生成一个**iterator**对象。如果传入了**context**，
 则把**iterator**绑定到**context**对象上。每次调用**iterator**对象都会传入三个参数：
@@ -96,11 +98,8 @@ Stackoverflow有个回答是[简略版](http://stackoverflow.com/questions/11600
 
 待续……
 
+Last update：2012年12月19日 14:26:47
 
 
 
 
-
-
-<script src="/lib/jquery.js" type="text/javascript"></script>
-<script src="https://raw.github.com/documentcloud/underscore/master/underscore-min.js" type="text/javascript"></script>
