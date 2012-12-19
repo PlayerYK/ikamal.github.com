@@ -84,7 +84,7 @@ Underscore有80多个函数，使用Backbone.js时发现了这个精巧的函数
 Function.prototype.call\(thisArg \[ , arg1 \[ , arg2, … \] \] \)  
 call将指定函数`Function`作为`thisArg`对象的方法来调用，将参数`args`传递给`Function`，返回值为`Function`的返回值。
 
-【5】神秘的breaker
+【5】神秘的breaker  
 关于underscore.js中断枚举Github有[好长的讨论](https://github.com/documentcloud/underscore/issues/596)，
 Stackoverflow有个回答是[简略版](http://stackoverflow.com/questions/11600735/underscores-each-checking-for-return-of-callback)
 
