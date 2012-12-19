@@ -25,11 +25,11 @@ Underscore有80多个函数，使用Backbone.js时发现了这个精巧的函数
 
       var each = _.each = _.forEach = function(obj, iterator, context) {
         if (obj == null) return;
-        if (nativeForEach && obj.forEach === nativeForEach) { //nativeForEach = Array.prototype.forEach
+        if (nativeForEach && obj.forEach === nativeForEach) { //【1】
           obj.forEach(iterator, context);
-        } else if (obj.length === +obj.length) { // 解释【1】
+        } else if (obj.length === +obj.length) { // 【2】【3】
           for (var i = 0, l = obj.length; i < l; i++) {
-            if (iterator.call(context, obj[i], i, obj) === breaker) return; // 解释【2】、【3】
+            if (iterator.call(context, obj[i], i, obj) === breaker) return; // 【4】【5】
           }
         } else {
           for (var key in obj) {
@@ -40,26 +40,61 @@ Underscore有80多个函数，使用Backbone.js时发现了这个精巧的函数
         }
       };
 
-【1】 [一元运算符+](http://www.ecma-international.org/ecma-262/5.1/#sec-11.4.6)
+【1】//nativeForEach = Array.prototype.forEach
+
+【2】 [一元运算符+](http://www.ecma-international.org/ecma-262/5.1/#sec-11.4.6)
 
     1. Let expr be the result of evaluating UnaryExpression.
     2. Return ToNumber(GetValue(expr)).
 
+【3】这里只检查length属性，这样会有问题的吧，不只是Array，argument才有length属性，如果用户自己构造了一个带length属性的对象，
+这样的结果会很意外吧：
 
-【2】[Function.prototype.call](http://www.ecma-international.org/ecma-262/5.1/#sec-15.3.4.4)  Function.prototype.call\(thisArg \[ , arg1 \[ , arg2, … \] \] \)
+    function show(val,key,o){
+        console.log(val);
+        console.log(key);
+        console.log(o);
+        console.log('----');
+    }
+
+    var obj = {
+        "length":3,
+        "var1":"one",
+        "var4":"four"
+    };
+    _.each(obj,show);
 
 
-【3】神秘的breaker
 
-关于中断枚举这里有[好长的讨论](https://github.com/documentcloud/underscore/issues/596)
-简略版有[很好的总结](http://stackoverflow.com/questions/11600735/underscores-each-checking-for-return-of-callback)
+执行结果见[jsbin](http://jsbin.com/uxeneb/3/edit)：
 
-> 用一个秘密的变量来中断each循环，这个变量不暴露在外。
-> 不暴露的原因是原生方法中（目前）没有这个特性，如果这样做了（暴漏这个秘密变量在外），
+    undefined
+    0
+    Object {length: 3, var1: "one", var4: "four"}
+    ----
+    undefined
+    1
+    Object {length: 3, var1: "one", var4: "four"}
+    ----
+    undefined
+    2
+    Object {length: 3, var1: "one", var4: "four"}
+    ----
+【4】[Function.prototype.call](http://www.ecma-international.org/ecma-262/5.1/#sec-15.3.4.4)
+Function.prototype.call\(thisArg \[ , arg1 \[ , arg2, … \] \] \)  
+call将指定函数`Function`作为`thisArg`对象的方法来调用，将参数`args`传递给`Function`，返回值为`Function`的返回值。
+
+【5】神秘的breaker
+关于underscore.js中断枚举Github有[好长的讨论](https://github.com/documentcloud/underscore/issues/596)，
+Stackoverflow有个回答是[简略版](http://stackoverflow.com/questions/11600735/underscores-each-checking-for-return-of-callback)
+
+> 用一个秘密的变量来中断each循环，这个变量是underscore的内部变量。
+> 不暴露在外的原因是原生方法中（目前）没有这个特性，如果这样做了，
 > 就会导致（用户写的代码中的）中断特性只有在原生函数不支持的时候才能用
 
-Tobe continued...
+不过看源码是先尝试用原生的forEach方法，既然原生不支持，那执行到这里的时候就不能中断了？
 
+待续……
 
 
 
@@ -68,4 +103,4 @@ Tobe continued...
 
 
 <script src="/lib/jquery.js" type="text/javascript"></script>
-<script src="/lib/underscore.js" type="text/javascript"></script>
+<script src="https://raw.github.com/documentcloud/underscore/master/underscore-min.js" type="text/javascript"></script>
