@@ -31,13 +31,13 @@ Collections分类是underscore.js最基础的函数的集合，除了上文的`e
         };
     };
     
-【1】apply
+【1】[Function.prototype.apply](http://www.ecma-international.org/ecma-262/5.1/#sec-15.3.4.3)
+Function.prototype.apply (thisArg, argArray)
 
-【2】slice.call
+【2】Array.prototype.slice.call
 
 【3】这段代码有点复杂  
 先上一个简单版本：
-
     
     _.bind = function(func, obj) {
         if (func.bind === nativeBind && nativeBind) return nativeBind.apply(func, slice.call(arguments, 1));
@@ -47,6 +47,9 @@ Collections分类是underscore.js最基础的函数的集合，除了上文的`e
         }
     };
     
+需要解释的就是这里的[partial application](http://msdn.microsoft.com/en-us/magazine/gg575560.aspx)
+还有 [JavaScript currying](http://www.dustindiaz.com/javascript-curry/)
+
 Github上根据[这个Issue](https://github.com/documentcloud/underscore/issues/280),
 [在MDN的建议下](https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Function/bind),
 [Pull request #282 ](https://github.com/simao/underscore/commit/fe30447d2dacd2c232c5df9f27834ebee6989b8b)让这段代码变成这么复杂了
