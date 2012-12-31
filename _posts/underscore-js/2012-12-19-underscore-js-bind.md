@@ -133,11 +133,11 @@ Github上根据[这个Issue](https://github.com/documentcloud/underscore/issues/
 
 
 扩展阅读：
-[Understanding the code of _.bind](http://stackoverflow.com/questions/8552908/understanding-the-code-of-bind)  
+[Understanding the code of \_.bind](http://stackoverflow.com/questions/8552908/understanding-the-code-of-bind)
 [underscore中的function类函数解析](http://www.blogjava.net/Hafeyang/archive/2012/11/08/undercore_function_uitlity.html)  
 [构造函数](http://www.cnblogs.com/TomXu/archive/2012/02/21/2352994.html)  
 [深入理解JavaScript系列（18）：面向对象编程之ECMAScript实现](http://www.cnblogs.com/TomXu/archive/2012/02/06/2330609.html)   
 
-updated:2012-12-31 17:29:03 星期一
-需要继续搞懂 构造函数  
+updated:2012-12-31 17:29:03 星期一  
+需要继续搞懂 构造函数
 tobe continued...
