@@ -83,9 +83,61 @@ Github上根据[这个Issue](https://github.com/documentcloud/underscore/issues/
         return fBound;
     };
     
-为了支持`bound()`单独调用被绑定的函数，
+最终版本：
+
+    var ctor = function(){};
+
+    _.bind = function bind(func, context) {
+        var bound, args;
+
+        // 如果原生支持，就用原生的.bind()
+        if (func.bind === nativeBind && nativeBind) return nativeBind.apply(func, slice.call(arguments, 1));
+
+        // 如果没有传入function参数，退出
+        if (!_.isFunction(func)) throw new TypeError;
+
+        // 支持绑定 function 和 context 后面的参数 (所以用 .slice(2))
+        args = slice.call(arguments, 2);
+
+        // 返回绑定后的函数
+        return bound = function() {
+
+            // if you simply do bound(), then `this` is the global object.
+            // This means the original function should be called with the
+            // bound `this` value and arguments. Arguments you pass to the
+            // bound function are concatenated to the bound arguments.
+            if (!(this instanceof bound)) return func.apply(context, args.concat(slice.call(arguments)));
+
+            // otherwise, you're calling like `new bound()`, because `this instanceof bound`.
+            // In that case, `this` should not be passed, but only the arguments. So, you
+            // create a function of which the prototype is the original function's prototype,
+            // and create an instance of it (to mimic `new func`).
+            ctor.prototype = func.prototype;
+
+            var self = new ctor; // won't execute anything since ctor's body is empty.
+            // Just creates an instance
+
+            // then, you call the original function with the `this` value of the instance,
+            // with bound arguments and new arguments concatenated. This way, the constructor
+            // (func) is executed on the instance.
+            var result = func.apply(self, args.concat(slice.call(arguments)));
+
+            // finally, return the result if it's an object (the specs say `new xxx` should
+            // return an object), otherwise return the instance (like you would with `new func`)
+            if (Object(result) === result) return result;
+            return self;
+        };
+    };
+
 [测试用例](https://github.com/simao/underscore/blob/master/test/functions.js)  
 
-updated:2012年12月24日 20:31:57 星期一  
-原型链，new机制，原生bind()机制把我搞的头大了，明天继续  
+
+扩展阅读：
+[Understanding the code of _.bind](http://stackoverflow.com/questions/8552908/understanding-the-code-of-bind)  
+[underscore中的function类函数解析](http://www.blogjava.net/Hafeyang/archive/2012/11/08/undercore_function_uitlity.html)  
+[构造函数](http://www.cnblogs.com/TomXu/archive/2012/02/21/2352994.html)  
+[深入理解JavaScript系列（18）：面向对象编程之ECMAScript实现](http://www.cnblogs.com/TomXu/archive/2012/02/06/2330609.html)   
+
+updated:2012-12-31 17:29:03 星期一
+需要继续搞懂 构造函数  
 tobe continued...
