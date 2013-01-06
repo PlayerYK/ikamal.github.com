@@ -39,7 +39,7 @@ _call将指定函数`Function`作为`thisArg`对象的方法来调用，将参�
 具体到这里，伪代码可以简略解释如下：
 
     Array.prototype.slice = function(start,end){
-    	var result = new Array();
+        var result = new Array();
     	//注释部分是处理参数为负数的情况，可以掠过
     	//len = this.length;
     	//start = start < 0 ? max(len + start) : min(start,len);
@@ -93,7 +93,7 @@ Github上根据[这个Issue](https://github.com/documentcloud/underscore/issues/
         // 如果原生支持，就用原生的.bind()
         if (func.bind === nativeBind && nativeBind) return nativeBind.apply(func, slice.call(arguments, 1));
 
-        // 如果没有传入function参数，退出
+        // 如果没有传入function参数，抛出异常
         if (!_.isFunction(func)) throw new TypeError;
 
         // 支持绑定 function 和 context 后面的参数 (所以用 .slice(2))
@@ -102,42 +102,46 @@ Github上根据[这个Issue](https://github.com/documentcloud/underscore/issues/
         // 返回绑定后的函数
         return bound = function() {
 
-            // if you simply do bound(), then `this` is the global object.
-            // This means the original function should be called with the
-            // bound `this` value and arguments. Arguments you pass to the
-            // bound function are concatenated to the bound arguments.
+            // 如果没有用new关键字，(this instanceof bound)就为假
+            // 此时为正常的调用 bound()，bound 函数中的 `this` 和 arguments
+            // 都已经绑定，传入参数，直接调用函数就可以了。
             if (!(this instanceof bound)) return func.apply(context, args.concat(slice.call(arguments)));
 
-            // otherwise, you're calling like `new bound()`, because `this instanceof bound`.
-            // In that case, `this` should not be passed, but only the arguments. So, you
-            // create a function of which the prototype is the original function's prototype,
-            // and create an instance of it (to mimic `new func`).
+            // 如果使用了new关键字，`new bound()` 
+            // (this instanceof bound)为真，此时模拟函数的构造函数
+            // (JavaScript中通过 new 关键字方式调用的函数都被认为是构造函数。)
+            // 具体步骤就是：创建一个对象A，将A的prototype指向原函数的prototype
+            // 执行原函数
+            // 如果原函数没有显式的return一个对象，则隐式的返回A对象的实例
             ctor.prototype = func.prototype;
+            
+            // ctor是空函数，不进行任何操作
+            // 只创建一个实例对象
+            var self = new ctor; 
 
-            var self = new ctor; // won't execute anything since ctor's body is empty.
-            // Just creates an instance
-
-            // then, you call the original function with the `this` value of the instance,
-            // with bound arguments and new arguments concatenated. This way, the constructor
-            // (func) is executed on the instance.
+            // 用这个新创建的实例作为 `this` 调用原函数，并传入相应的参数
+            // 原函数作为新实例的构造函数执行
             var result = func.apply(self, args.concat(slice.call(arguments)));
 
-            // finally, return the result if it's an object (the specs say `new xxx` should
-            // return an object), otherwise return the instance (like you would with `new func`)
+            // 执行的结果是 object 就返回，不是的话返回这个实例对象
+            // 因为标准规定 `new xxx` 操作必须返回对象
             if (Object(result) === result) return result;
             return self;
         };
     };
 
-[测试用例](https://github.com/simao/underscore/blob/master/test/functions.js)  
 
 
-扩展阅读：
-[Understanding the code of \_.bind](http://stackoverflow.com/questions/8552908/understanding-the-code-of-bind)
+扩展阅读：  
+[underscore functions 测试用例](https://github.com/documentcloud/underscore/blob/master/test/functions.js)  
+[Understanding the code of \_.bind](http://stackoverflow.com/questions/8552908/understanding-the-code-of-bind)  
 [underscore中的function类函数解析](http://www.blogjava.net/Hafeyang/archive/2012/11/08/undercore_function_uitlity.html)  
-[构造函数](http://www.cnblogs.com/TomXu/archive/2012/02/21/2352994.html)  
+[深入理解JavaScript系列（2）：揭秘命名函数表达式](http://www.cnblogs.com/TomXu/archive/2011/12/29/2290308.html)  
+[深入理解JavaScript系列（5）：强大的原型和原型链](http://www.cnblogs.com/TomXu/archive/2012/01/05/2305453.html)  
+[JavaScript 秘密花园 构造函数](http://bonsaiden.github.com/JavaScript-Garden/zh/#function.constructors)  
+[深入理解JavaScript系列（26）：设计模式之构造函数模式](http://www.cnblogs.com/TomXu/archive/2012/02/21/2352994.html)  
 [深入理解JavaScript系列（18）：面向对象编程之ECMAScript实现](http://www.cnblogs.com/TomXu/archive/2012/02/06/2330609.html)   
 
-updated:2012-12-31 17:29:03 星期一  
-需要继续搞懂 构造函数
+updated:2013年1月6日 19:03:00 星期日
+
 tobe continued...
