@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8/>
+    <title>layout-wireframe</title>
+    <style type="text/css">
+        body{ margin:0; padding:0; }
+        .wrapper{
+            /*height:auto;*/
+            margin-top:30px;
+            /*overflow:hidden;*/
+        }
+        .wrapper .top_nav{
+            background-color:#5A7857;
+            width:100%;
+            height:30px;
+            position:fixed;
+            top:0;
+            left:0;
+        }
+        .wrapper .content{
+            height:100%;
+            background-color:#FFFFFF;
+            margin-left:30%;
+        }
+        .wrapper .aside{
+            background-color:#CDF3BC;
+            width:30%;
+            height:100%;
+            position:fixed;
+            top:30px;
+            left:0;
+        }
+        .wrapper .aside .aside_header{
+            background-color:#828282;
+            width:100%;
+            height:25px;
+        }
+        .wrapper .aside .aside_top{
+            background-color:#219DAF;
+            width:100%;
+            height:60%;
+            overflow-y:scroll;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="top_nav">
+        Top navigation. Position:fixed;Height:30px;
+    </div>
+    <div class="content">
+        Content area, margin-left:30%;
+    </div>
+    <div class="aside">
+        <div class="aside_header">
+            Sidebar header
+        </div>
+        <div class="aside_top">
+            Sidebar Top Section
+            <br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br>
+            scroll
+        </div>
+        <div>
+            Sidebar Bottom Section <br>
+            width:30%;
+        </div>
+    </div>
+</div>
+<script>
+
+</script>
+</body>
+</html>
