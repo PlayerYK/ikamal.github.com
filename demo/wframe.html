@@ -1,76 +1,189 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset=utf-8/>
     <title>layout-wireframe</title>
     <style type="text/css">
-        body{ margin:0; padding:0; }
-        .wrapper{
-            /*height:auto;*/
-            margin-top:30px;
-            /*overflow:hidden;*/
+        body{ 
+            margin:0; 
+            padding:0; 
+            color:#232B09;
+            line-height:1.5em;
+            font-family:"microsoft yahei",arial,sans-serif;
+            text-align:center;
         }
-        .wrapper .top_nav{
+        h1,h2{margin:0;padding:0;}
+        h1{line-height:1.5em;}
+        h2{
+            line-height:30px;
+            font-size:14px;
+        }
+        .sidebar h2,.top_nav h2{
+            text-align:center;
+        }
+        ul,li{list-style:none;margin:0;padding:0;}
+        li{margin-left:20px;}
+        .sidebar_header h2{color:#FFFFFF;}
+        .al_right{
+            text-align:right;
+        }
+
+
+        .top_nav{
             background-color:#5A7857;
             width:100%;
             height:30px;
             position:fixed;
             top:0;
             left:0;
+            z-index:10;
+        }
+        .wrapper{
+            width:940px;
+            margin:0 auto;
+            padding-top:30px;
+            text-align:left;
+            position:relative;
         }
         .wrapper .content{
-            height:100%;
             background-color:#FFFFFF;
-            margin-left:30%;
+            /*margin-left:30%;*/
+            margin-left:196px;
+            padding:20px 20px 0 10px;
         }
-        .wrapper .aside{
-            background-color:#CDF3BC;
-            width:30%;
+        .wrapper .sidebar{
+            /*width:30%;*/
+            width:196px;
             height:100%;
             position:fixed;
             top:30px;
-            left:0;
         }
-        .wrapper .aside .aside_header{
+        .wrapper .sidebar .sidebar_header{
             background-color:#828282;
-            width:100%;
+            /*width:100%;*/
+            width:196px;
             height:25px;
+            position:fixed;
+            top:30px;
+            /*left:0;*/
         }
-        .wrapper .aside .aside_top{
+        .wrapper .sidebar_con{
+            padding-top:25px;
+        }
+        .wrapper .sidebar .sidebar_top{
             background-color:#219DAF;
-            width:100%;
             height:60%;
+            overflow-y:scroll;
+        }
+        .wrapper .sidebar .sidebar_bottom{
+            background-color:#CDF3BC;
+            height:40%;
             overflow-y:scroll;
         }
     </style>
 </head>
 <body>
-<div class="wrapper">
-    <div class="top_nav">
-        Top navigation. Position:fixed;Height:30px;
-    </div>
+<div class="top_nav">
+    <h2>Top navigation. Position:fixed;Height:30px;</h2>
+</div>
+<div id="wrapper" class="wrapper">
     <div class="content">
-        Content area, margin-left:30%;
+        <h1>Sidebar area</h1>
+        <ul>
+            <li>- the Sidebar is fixed</li>
+            <li>- the Sidebar height should grow if the browser is resized</li>
+            <li>- the Sidebar header is fixed</li>
+            <li>- the Sidebar top section is scrollable</li>
+            <li>- the Sidebar bottom section is scrollable</li>
+            <li>- the Sidebar is resizable as indicated</li>
+        </ul>
+        <div class="al_right">
+            <h2>Content area</h2>
+        </div>
+        1<br>
+        2<br>
+        3<br>
+        4<br>
+        5<br>
+        6<br>
+        7<br>
+        8<br>
+        9<br>
+        10<br>
+        1<br>
+        2<br>
+        3<br>
+        4<br>
+        5<br>
+        6<br>
+        7<br>
+        8<br>
+        9<br>
+        10<br>
+        1<br>
+        2<br>
+        3<br>
+        4<br>
+        5<br>
+        6<br>
+        7<br>
+        8<br>
+        9<br>
+        10<br>
+        scroll
     </div>
-    <div class="aside">
-        <div class="aside_header">
-            Sidebar header
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar_header">
+            <h2>Sidebar header</h2>
         </div>
-        <div class="aside_top">
-            Sidebar Top Section
-            <br><br><br><br><br><br><br><br><br><br><br>
-            <br><br><br><br><br><br><br><br><br><br><br>
-            <br><br><br><br><br><br><br><br><br><br><br>
-            scroll
-        </div>
-        <div>
-            Sidebar Bottom Section <br>
-            width:30%;
+        <div id="sidebar_con" class="sidebar_con">
+            <div class="sidebar_top">
+                <h2>Sidebar Top Section</h2>
+                <br><br><br><br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br><br><br><br>
+                scroll
+            </div>
+            <div class="sidebar_bottom">
+                <h2>Sidebar Bottom Section</h2>
+                <br><br><br><br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br>
+                5<br>
+                4<br>                
+                3<br>
+                2<br>
+                scroll
+            </div>
+            
         </div>
     </div>
 </div>
-<script>
-
-</script>
 </body>
+<script type="text/javascript">
+    window.onload = window.onresize = setSidebar;
+
+    function setSidebar(){
+        var winSize = getWinSize();
+//        sidebarHeight = windowHeight - topNav(30) - SidebarHeader(25)
+        document.getElementById('sidebar_con').style.height =winSize.H - 30 - 25 + "px";
+    }
+    function getWinSize(){
+        var winW = 0, winH = 0;
+        if (document.body && document.body.offsetWidth) {
+            winW = document.body.offsetWidth;
+            winH = document.body.offsetHeight;
+        }
+        if (document.compatMode=='CSS1Compat' &&
+                document.documentElement &&
+                document.documentElement.offsetWidth ) {
+            winW = document.documentElement.offsetWidth;
+            winH = document.documentElement.offsetHeight;
+        }
+        if (window.innerWidth && window.innerHeight) {
+            winW = window.innerWidth;
+            winH = window.innerHeight;
+        }
+        return {"H":winH,"W":winW};
+    }
+</script>
 </html>
