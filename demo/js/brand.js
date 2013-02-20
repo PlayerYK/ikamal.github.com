@@ -152,8 +152,8 @@ $(function(){
             oThis.zoomOut(large_div, obj);
         } else {
             var newCss = {
-                width:"200px",
-                height:"200px"
+                width:oThis.config.cubeSize * 2,
+                height:oThis.config.cubeSize * 2
             };
             var newDots = obj.data('dots');
             var tmpPos = obj.data('pos');
@@ -205,8 +205,8 @@ $(function(){
         oThis = this;
         var newCss = {
             "z-index":"1",
-            width:"100px",
-            height:"100px",
+            width:oThis.config.cubeSize,
+            height:oThis.config.cubeSize,
             left:obj.data('pos')[1] * oThis.config.cubeSize,
             top:obj.data('pos')[0] * oThis.config.cubeSize
         };
