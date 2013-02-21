@@ -52,11 +52,12 @@ cube.init = function(elem,config){
             if(oThis.rFlag){
                 return;
             }
-            oThis.rFlag = 1;
             if (currDiv.data('enlarge') == 1) {
                 /* 暂时注释掉只缩小的功能 */
+//                oThis.rFlag = 1;
 //                cube.zoomOut(currDiv);// 缩小	
             } else {
+                oThis.rFlag = 1;
                 cube.zoomIn(currDiv);// 放大
             }
         })
