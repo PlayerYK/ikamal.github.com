@@ -54,18 +54,21 @@ cube.init = function(elem,config){
             }
             oThis.rFlag = 1;
             if (currDiv.data('enlarge') == 1) {
-                cube.zoomOut(currDiv);// 缩小	
+                /* 暂时注释掉只缩小的功能 */
+//                cube.zoomOut(currDiv);// 缩小	
             } else {
                 cube.zoomIn(currDiv);// 放大
             }
         })
     });
     oThis.moveTo();
+    // 随机展开一个方块
+    oThis.cubes.eq(parseInt(Math.random() * oThis.cubes.length)).click();
 };
 cube.update = function(){
     var oThis = this;
     oThis.setPos();
-    oThis.moveTo();
+    oThis.animateTo();
 };
 cube.setPos = function(){
     oThis = this;
@@ -117,7 +120,21 @@ cube.setPos = function(){
         }
     })
 };
-cube.moveTo = function(){
+cube.moveTo = function(first){
+    this.cubes.each(function(){
+        var currCube = $(this);
+        if(!first && currCube.data('enlarge') == 1){
+            return;
+        }
+        var pos = currCube.data('pos');
+        currCube.css({
+            'left':pos[1] * 100,
+            'top':pos[0] * 100,
+            'position':'absolute'
+        });
+    })
+};
+cube.animateTo = function(){
     this.cubes.each(function(){
         var currCube = $(this);
         if(currCube.data('enlarge') == 1){
