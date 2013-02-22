@@ -7,7 +7,10 @@
  */
 
 $(function(){    
-    cube.init($('#grid-content'),{"cubeSize":100});
+    cube.init($('#grid-content'),{
+        "cubeSize":100,
+        "easing":"easeOutCubic"
+    });
 });
 
 var cube = {
@@ -20,7 +23,9 @@ var cube = {
     "rFlag":0    // 正在动画标志
 };
 cube.config = {
-    "cubeSize":0
+    "cubeSize":0,
+    "easing":"linear",
+    "duration":800
 };
 
 cube.init = function(elem,config){
@@ -136,6 +141,7 @@ cube.moveTo = function(first){
     })
 };
 cube.animateTo = function(){
+    var oThis = this;
     this.cubes.each(function(){
         var currCube = $(this);
         if(currCube.data('enlarge') == 1){
@@ -145,7 +151,7 @@ cube.animateTo = function(){
         currCube.animate({
             'left':pos[1] * 100,
             'top':pos[0] * 100
-        },'200','linear')
+        },oThis.config.duration,oThis.config.easing)
             .css({'position':'absolute'})
     })
 };
@@ -192,7 +198,8 @@ cube.zoomIn = function(obj) {
         obj.data('dots',newDots);
 
         obj.animate(newCss, {
-            duration:"200",
+            duration:600,
+            easing:oThis.config.easing,
             complete:function () {
                 oThis.rFlag = 0;
             }
@@ -228,7 +235,7 @@ cube.zoomOut = function(obj, obj2) {
  * 注释掉方块缩小的动画
  * */
 //        obj.animate(newCss, {
-//            duration:"100",
+//            duration:oThis.config.duration,
 //            complete:function () {
 //                obj.data('dots',[obj.data('pos')])
 //                    .data('enlarge', '0')
