@@ -8,7 +8,7 @@
 
 $(function(){    
     cube.init($('#grid-content'),{
-        "cubeSize":100,
+        "cubeSize":120,
         "easing":"easeOutCubic"
     });
 });
@@ -127,6 +127,7 @@ cube.setPos = function(){
     })
 };
 cube.moveTo = function(first){
+    var oThis = this;
     this.cubes.each(function(){
         var currCube = $(this);
         if(!first && currCube.data('enlarge') == 1){
@@ -134,8 +135,8 @@ cube.moveTo = function(first){
         }
         var pos = currCube.data('pos');
         currCube.css({
-            'left':pos[1] * 100,
-            'top':pos[0] * 100,
+            'left':pos[1] * oThis.config.cubeSize,
+            'top':pos[0] * oThis.config.cubeSize,
             'position':'absolute'
         });
     })
@@ -149,8 +150,8 @@ cube.animateTo = function(){
         }
         var pos = currCube.data('pos');
         currCube.animate({
-            'left':pos[1] * 100,
-            'top':pos[0] * 100
+            'left':pos[1] * oThis.config.cubeSize,
+            'top':pos[0] * oThis.config.cubeSize
         },oThis.config.duration,oThis.config.easing)
             .css({'position':'absolute'})
     })

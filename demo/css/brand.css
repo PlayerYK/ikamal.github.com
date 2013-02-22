@@ -8,8 +8,8 @@ body{
     text-align:center;
 }
 .wrapper{
-    width:550px;
-    height:700px;
+    width:600px;
+    height:600px;
     background-color:#FAFAFA;
     overflow:hidden;
     margin:20px auto;
@@ -19,8 +19,8 @@ body{
 }
 .item{
     float:left;
-    width:100px;
-    height:100px;
+    width:120px;
+    height:120px;
     overflow:hidden;
     z-index:1;
     /*background-color:#e4e4e4;*/
@@ -30,9 +30,19 @@ body{
 }
 .item .logo{
     float:left;
-    margin:0 10px 5px 0;
-    width:100px;
-    height:100px;
+    margin:0 10px 2px 0;
+    width:120px;
+    height:90px;
+    padding-top: 30px;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    background-color:#FFFFFF;
+}
+.item .logo img{
+    width:120px;
+    display:block;
+    vertical-align: top;
 }
 .item h3{
     margin:0;
@@ -48,8 +58,8 @@ body{
     color:#E3E3E3;
 }
 .white_theme{
-    background-color:#E3E3E3;
-    color:#000000;
+    background-color:#F2F2F2;
+    color:#666;
 }
 .gray_theme{
     background-color:#e4e4e4;
