@@ -5,7 +5,7 @@
  * Time: 上午11:15
  * Brand demo js
  */
-var global_flag = false;
+var global_flag = true;
 $(function(){    
     cube.init($('#grid-content'),{
         "cubeSize":120,
