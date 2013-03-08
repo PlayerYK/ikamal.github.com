@@ -10,6 +10,7 @@ $(function(){
     cube.init($('#grid-content'),{
         "cubeSize":120,
         "easing":"easeOutCubic"
+//        "easing":"easeOutExpo"
     });
 });
 
