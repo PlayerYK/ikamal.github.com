@@ -1,0 +1,20 @@
+﻿function matrixSortX(a,b){
+        if(!a || !b) return 0;
+        return (a[0] > b[0]) ? 1 : -1;
+    }
+var mtx = [[160,1000,0]];
+var cell = [0, 160, 160];
+var _mtx = mtx.concat([cell]).sort(matrixSortX);
+console.log(_mtx);
+
+
+
+function matrixSortDepth(a,b){
+	if(!a || !b) return 0;
+	return((a[2] == b[2] && a[0] > b[0])?1:-1);
+}
+
+mtx = [[160,500,0],[0, 160, 160]];
+
+
+mtx.contact().sort(matrixSortDepth);

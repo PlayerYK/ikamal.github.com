@@ -2,32 +2,42 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>品牌墙Demo</title>
+    <title>Grid Demo</title>
     <link rel="stylesheet" href="grid.css" type="text/css" media="screen"/>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="jquery.easing.min.js"></script>
-    <script type="text/javascript" src="jquery.vgrid.js"></script>
+    <script type="text/javascript" src="jquery.vgrid-mod.js"></script>
+    <script type="text/javascript" src="jquery.textinput.js"></script>
 </head>
 <body>
+<div class="search_div">
+    <input type="text" class="search_txt" id="search_bar">
+</div>
 <div class="wrapper" >
     <ul id="grid-content" class="clearfix">
-        <li class="item">
+        <li data-key="great" class="item">
             <a class="icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            <span class="tip">great</span>
         </li>
-        <li class="item">
+        <li data-key="ice"  class="item">
             <a class="icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            <span class="tip">ice</span>
         </li>
-        <li class="item">
+        <li data-key="great work"  class="item">
             <a class="icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            <span class="tip">great work</span>
         </li>
-        <li class="item">
+        <li data-key="ice age"  class="item">
             <a class="icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            <span class="tip">ice sea</span>
         </li>
-        <li class="item">
+        <li data-key="great place"  class="item">
             <a class="icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            <span class="tip">great place</span>
         </li>
-        <li class="item">
+        <li data-key="ice sea"  class="item">
             <a class="icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            <span class="tip">ice sea</span>
         </li>
     </ul>
 
@@ -35,9 +45,11 @@
 </body>
 <script type="text/javascript">
     $(function(){
-        $("#grid-content").vgrid();
+        var h = $("#grid-content").vgrid();
 
-
+        $('#search_bar').bind('txtinput',function(event){
+            h.vgfilter($(this).val(),null,500,10);
+        });
 
 //        cube.init($('#grid-content'),{
 //            "cubeSize":160,
