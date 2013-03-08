@@ -5,13 +5,20 @@
  * Time: 上午11:15
  * Brand demo js
  */
-
+var global_flag = false;
 $(function(){    
     cube.init($('#grid-content'),{
         "cubeSize":120,
         "easing":"easeOutCubic"
 //        "easing":"easeOutExpo"
     });
+    $('#change').click(function(){
+        if(global_flag){
+            global_flag = false;
+        }else{
+            global_flag = true;
+        }
+    })
 });
 
 var cube = {
@@ -59,9 +66,11 @@ cube.init = function(elem,config){
                 return;
             }
             if (currDiv.data('enlarge') == 1) {
-                /* 暂时注释掉只缩小的功能 */
-//                oThis.rFlag = 1;
-//                cube.zoomOut(currDiv);// 缩小	
+                /* 暂时注释掉只缩小的功能  打开*/
+                if(global_flag){
+                    oThis.rFlag = 1;
+                    cube.zoomOut(currDiv);// 缩小
+                }
             } else {
                 oThis.rFlag = 1;
                 cube.zoomIn(currDiv);// 放大
