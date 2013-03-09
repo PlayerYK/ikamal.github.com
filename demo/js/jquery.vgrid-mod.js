@@ -186,7 +186,7 @@
                     easing:easing
                 };
                 if (children.size() - 1 == i) {
-                    _opt.complete = _self.data("_vgopt").onFinish || null;
+                    _opt.complete = wrapFinishFunction(_self,delay);//_self.data("_vgopt").onFinish || null;
                 }
                 clearTimeout(_c.data("_vgtimeout"));
                 _c.data("_vgtimeout", setTimeout(function () {
@@ -286,12 +286,12 @@
         var _tmpsize = {width:toSmall.width(), height:toSmall.height()};
 //        console.log(_tmpsize);
         toSmall.css(_tmpsize)
-//            .empty()
-            .css({'background-color':"gray"})
+            .animate({'opacity':0.3},'fast')
             .attr('data-enlarge', '0')
-            .animate(_defsize, 500, function () {
-                $(this).css({width:'auto', height:'auto', "background-color":'white'})
-                    .html(toSmall.data('_vg-default-html'));
+            .animate(_defsize, 250, function () {
+                $(this).css({width:'auto', height:'auto'})
+                    .html(toSmall.data('_vg-default-html'))
+                    .animate({'opacity':1},500);
             });
 
         if (toLarge) {
@@ -313,23 +313,42 @@
         // simulate ajax loading status
         setTimeout(function () {
             // this will be ajax callback function
-            var response_text = $('#ajax_content').text();
+            var response_text = $('#ajax_content')[0].innerHTML;
+//            alert(response_text);
             if (needCollapse) {
                 collapse(expanded, target, toLarge);
             }
             toLarge.html(response_text)
-                .attr('data-enlarge', '1');
+                .attr('data-enlarge', '1')
+                .css('opacity',0.3)
+                .animate({'opacity':1},500);
             target.vgrefresh();
         }, 500);
 //        }
     };
+    function wrapFinishFunction(target,delay){
+        var _enlarged = target.find('[data-enlarge="1"]');
+        var _top = target.offset().top;
+        if(_enlarged.length > 0){
+            _top = _enlarged.offset().top;
+        }
+//        console.log(_top);
+        setTimeout(function(){
+            $("html, body").animate({scrollTop: _top}, 500);
+        },delay);
+
+        if(target.data("_vgopt").onFinish
+            && typeof(target.data("_vgopt").onFinish) == 'function'){
+            target.data("_vgopt").onFinish();
+        }
+    }
     $.fn.extend({
         vgrid:function (option) {
             var config = {
                 "expand_btn":'.js_expand',
                 "collapse_btn":'.close_ajax',
                 "easeing":'linear',
-                "useLoadImageEvent":false,
+                "useLoadImageEvent":true,
                 "useFontSizeListener":false,
                 "time":500,
                 "delay":0,
@@ -340,6 +359,7 @@
             var _target = $(this);
 //            var _opt = option || {};
             var _opt = $.extend({}, option, config);
+
             if (_opt.easeing) {
                 _opt.easing = _opt.easeing;
             }

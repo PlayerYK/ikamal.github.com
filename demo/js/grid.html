@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="grid.css" type="text/css" media="screen"/>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="jquery.easing.min.js"></script>
-    <script type="text/javascript" src="jquery.vgrid-mod.js?t=2"></script>
+    <script type="text/javascript" src="jquery.vgrid-mod.js?t=9"></script>
     <script type="text/javascript" src="jquery.textinput.js"></script>
 </head>
 <body>
@@ -62,8 +62,7 @@
 //            onFinish: function(){}
 //        };
         var h = $("#grid-content").vgrid({
-            easing: "easeOutQuint",
-            useLoadImageEvent: true
+            easing: "easeOutQuint",onFinish: function(){console.log('fffff')}
         });
 
         $('#search_bar').bind('txtinput',function(event){
