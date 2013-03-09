@@ -18,3 +18,10 @@ mtx = [[160,500,0],[0, 160, 160]];
 
 
 mtx.contact().sort(matrixSortDepth);
+
+2013年3月9日 01:48:23 星期六
+brand.js
+动画中的方块，z-index设置的小一些，不要挡住当前选择的方块
+
+
+

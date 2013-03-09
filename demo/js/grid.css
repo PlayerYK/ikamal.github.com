@@ -85,16 +85,19 @@ body{
     text-align:left;
 }
 .item{
-    float:left;
-    width:160px;
-    height:160px;
-    overflow:hidden;
     z-index:1;
     position:relative;
+    margin:10px 10px 0;
 }
 .item .tip{
     position:absolute;
     top:20px;
+    left:20px;
+    color:white;
+}
+.item .loading_tip{
+    position:absolute;
+    top:50px;
     left:20px;
     color:white;
 }
@@ -106,4 +109,9 @@ body{
     width:160px;
     height:160px;
     display:block;
+}
+.item .close_ajax{
+    color:white;
+    background-color:#2f96b4;
+    padding:5px;
 }
