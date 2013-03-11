@@ -2,32 +2,42 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>品牌墙Demo</title>
+    <title>Grid Demo</title>
     <link rel="stylesheet" href="grid.css" type="text/css" media="screen"/>
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="jquery.easing.min.js"></script>
-    <script type="text/javascript" src="jquery.vgrid.js"></script>
+    <script type="text/javascript" src="jquery.vgrid-mod.js?t=9"></script>
+    <script type="text/javascript" src="jquery.textinput.js"></script>
 </head>
 <body>
+<div class="search_div">
+    <input type="text" class="search_txt" id="search_bar">
+</div>
 <div class="wrapper" >
     <ul id="grid-content" class="clearfix">
-        <li class="item">
-            <a class="icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+        <li data-key="great" class="item">
+            <a class="js_expand icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            <span class="tip">great</span>
         </li>
-        <li class="item">
-            <a class="icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+        <li data-key="ice"  class="item">
+            <a class="js_expand icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            <span class="tip">ice</span>
         </li>
-        <li class="item">
-            <a class="icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+        <li data-key="great work"  class="item">
+            <a class="js_expand icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            <span class="tip">great work</span>
         </li>
-        <li class="item">
-            <a class="icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+        <li data-key="ice age"  class="item">
+            <a class="js_expand icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            <span class="tip">ice sea</span>
         </li>
-        <li class="item">
-            <a class="icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+        <li data-key="great place"  class="item">
+            <a class="js_expand icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            <span class="tip">great place</span>
         </li>
-        <li class="item">
-            <a class="icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+        <li data-key="ice sea"  class="item">
+            <a class="js_expand icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            <span class="tip">ice sea</span>
         </li>
     </ul>
 
@@ -35,14 +45,40 @@
 </body>
 <script type="text/javascript">
     $(function(){
-        $("#grid-content").vgrid();
+// available options
+//        {
+//            "expand_btn":'.js_expand',
+//            "collapse_btn":'.close_ajax',
+//            "easeing":'linear',
+//            "useLoadImageEvent":false,
+//            "useFontSizeListener":false,
+//            "time":250,
+//            "delay":0,
+//            fadeIn: {
+//                time: 500,
+//                delay: 50
+//            },
+//            onStart: function(){},
+//            onFinish: function(){}
+//        };
+        var h = $("#grid-content").vgrid({
+            easing: "easeOutQuint",onFinish: function(){console.log('fffff')}
+        });
 
+        $('#search_bar').bind('txtinput',function(event){
+            h.vgfilter($(this).val(),null,500,10);
+        });
 
-
-//        cube.init($('#grid-content'),{
-//            "cubeSize":160,
-//            "easing":"easeOutCubic"
-//        });
     });
+</script>
+
+<script type="text/template" id="ajax_content">
+    <div style="width:500px;padding:10px; background-color:#efefef;">
+        ajax loaded contents
+        <img src="http://takedesigns.com/wp-content/uploads/2012/09/google-usa.jpg" alt="">
+        <p>ajax loaded contents</p>
+        <span style="cursor: pointer; position: absolute; top: 8px; right: 10px;"><span class="close_ajax">close</span></span>
+        <span style="cursor: pointer; position: absolute; bottom: 10px; right: 8px;"><span class="close_ajax">close</span></span>
+    </div>
 </script>
 </html>

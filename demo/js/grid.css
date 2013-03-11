@@ -67,22 +67,39 @@ body{
     color:#333;
     margin:0;
     padding:0;
-    text-align:center;
+}
+.search_div{
+    padding:20px 30px;
+}
+.search_div .search_txt{
+    border:1px solid #EBEBEB;
+    height:25px;
+    line-height:25px;
+    width:200px;
 }
 .wrapper{
-    width:90%;
     background-color:#FAFAFA;
     overflow:hidden;
-    margin:20px auto;
+    margin:20px 30px;
     border:solid 1px #a35151;
     text-align:left;
 }
 .item{
-    float:left;
-    width:160px;
-    height:160px;
-    overflow:hidden;
     z-index:1;
+    position:relative;
+    margin:10px 10px 0;
+}
+.item .tip{
+    position:absolute;
+    top:20px;
+    left:20px;
+    color:white;
+}
+.item .loading_tip{
+    position:absolute;
+    top:50px;
+    left:20px;
+    color:white;
 }
 .item .icon{
     cursor: pointer;
@@ -92,4 +109,9 @@ body{
     width:160px;
     height:160px;
     display:block;
+}
+.item .close_ajax{
+    color:white;
+    background-color:#2f96b4;
+    padding:5px;
 }
