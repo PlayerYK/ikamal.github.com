@@ -21,10 +21,11 @@
 			if(_c.css("display") == "none"){
 				return true;
 			}
-			_size = getSize(_c);
-			_point = getAttachPoint(_matrix, _size[0]);
-			_matrix = updateAttachArea(_matrix, _point, _size);
-			_hmax = Math.max(_hmax, _point[1] + _size[1]);
+            console.log('------'+i+'------');
+			_size = getSize(_c); console.log(_size);
+			_point = getAttachPoint(_matrix, _size[0]);console.log(_point);
+			_matrix = updateAttachArea(_matrix, _point, _size);console.log(_matrix);
+			_hmax = Math.max(_hmax, _point[1] + _size[1]);console.log(_hmax);
 			_c.data("_vgleft", _point[0]);
 			_c.data("_vgtop", _point[1]);
 		});
