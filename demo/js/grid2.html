@@ -39,6 +39,49 @@
         .open-content{ position:relative; top:3px; z-index:2; }
 
         .simple .cunload{ display:block; color:white; height:40px; position:absolute; overflow:hidden; right:27px }
+
+        @-webkit-keyframes animateTrans {
+            from {
+                /*transform: rotate(0deg);*/
+                /*-ms-transform: rotate(0deg); *//* IE 9 */
+                /*-webkit-transform: rotate(0deg); *//* Safari and Chrome */
+                /*-o-transform: rotate(0deg); *//* Opera */
+                /*-moz-transform: rotate(0deg); *//* Firefox */
+            }
+            50% {
+                /*transform: rotate(-1deg);*/
+                /*-ms-transform: rotate(-1deg); *//* IE 9 */
+                /*-webkit-transform: rotate(-1deg); *//* Safari and Chrome */
+                /*-o-transform: rotate(-1deg); *//* Opera */
+                /*-moz-transform: rotate(-1deg); *//* Firefox */
+
+                transform: scale(.95,.95);
+                -ms-transform: scale(.9,.9); /* IE 9 */
+                -webkit-transform: scale(.95,.95); /* Safari and Chrome */
+                -o-transform: scale(.9,.9); /* Opera */
+                -moz-transform: scale(.9,.9); /* Firefox */
+            }
+            to {
+                /*transform: rotate(0deg);*/
+                /*-ms-transform: rotate(0deg); *//* IE 9 */
+                /*-webkit-transform: rotate(0deg); *//* Safari and Chrome */
+                /*-o-transform: rotate(0deg); *//* Opera */
+                /*-moz-transform: rotate(0deg); *//* Firefox */
+            }
+        }
+        .box:hover {
+            animation: animateTrans .5s;
+            -moz-animation: animateTrans .5s; /* Firefox */
+            -webkit-animation: animateTrans .5s; /* Safari and Chrome */
+            -o-animation: animateTrans .5s; /* Opera */
+        }
+        .box.expanded{
+            animation: none;
+            -moz-animation: none; /* Firefox */
+            -webkit-animation: none; /* Safari and Chrome */
+            -o-animation: none; /* Opera */
+        }
+
     </style>
 </head>
 <body>
