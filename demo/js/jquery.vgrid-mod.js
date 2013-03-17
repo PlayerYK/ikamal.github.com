@@ -29,6 +29,8 @@
             _hmax = Math.max(_hmax, _point[1] + _size[1]);
             _c.data("_vgleft", _point[0]);
             _c.data("_vgtop", _point[1]);
+            _c.data("_vgwidth", _c.width());
+            _c.data("_vgheight", _c.height());
         });
         self.data("_vgwrapheight", _hmax);
         heightTo(self);
@@ -173,7 +175,10 @@
         for (i = 0; i < imax; i++) {
             _c = $(children[i]);
             _pos = _c.position();
-            if (_pos.left != _c.data("_vgleft") || _pos.top != _c.data("_vgtop")) {
+            if (_pos.left != _c.data("_vgleft")
+                || _pos.top != _c.data("_vgtop")
+                || _c.width() != _c.data("_vgwidth")
+                || _c.height() != _c.data("_vgheight")) {
                 isMove = true;
             }
         }
@@ -193,7 +198,9 @@
                     _c.animate(
                         {
                             left:_c.data("_vgleft") + "px",
-                            top:_c.data("_vgtop") + "px"
+                            top:_c.data("_vgtop") + "px",
+                            width:_c.data("_vgwidth") + "px",
+                            height:_c.data("_vgheight") + "px"
                         },
                         _opt
                     );
@@ -285,14 +292,17 @@
         //{width:toLarge.width(),height:toLarge.height()}
         var _tmpsize = {width:toSmall.width(), height:toSmall.height()};
 //        console.log(_tmpsize);
-        toSmall.css(_tmpsize)
-            .animate({'opacity':0.3},'fast')
-            .attr('data-enlarge', '0')
-            .animate(_defsize, 250, function () {
-                $(this).css({width:'auto', height:'auto'})
-                    .html(toSmall.data('_vg-default-html'))
-                    .animate({'opacity':1},500);
-            });
+//        toSmall.css(_tmpsize)
+//            .animate({'opacity':0.3},'fast')
+//            .attr('data-enlarge', '0')
+//            .animate(_defsize, 250, function () {
+//                $(this).css({width:'auto', height:'auto'})
+//                    .html(toSmall.data('_vg-default-html'))
+//                    .animate({'opacity':1},500);
+//            });
+        toSmall.html(toSmall.data('_vg-default-html'));
+        toSmall.data("_vgwidth", _defsize.width);
+        toSmall.data("_vgheight", _defsize.height);
 
         if (toLarge) {
             expand(toLarge, target);
@@ -305,26 +315,27 @@
     function expand(toLarge, target) {
         var expanded = target.find('[data-enlarge="1"]');
         var needCollapse = (expanded.length > 0);
-//        if(expanded.length >0){
-//            collapse(expanded,target,toLarge);
-//        }else{
         toLarge.append('<span class="loading_tip">loading...</span>');
 
         // simulate ajax loading status
         setTimeout(function () {
-            // this will be ajax callback function
             var response_text = $('#ajax_content')[0].innerHTML;
-//            alert(response_text);
             if (needCollapse) {
                 collapse(expanded, target, toLarge);
             }
-            toLarge.html(response_text)
-                .attr('data-enlarge', '1')
-                .css('opacity',0.3)
-                .animate({'opacity':1},500);
+//            toLarge.html(response_text)
+//                .attr('data-enlarge', '1')
+//                .css('opacity',0.3)
+//                .animate({'opacity':1},500);
+            $('body').append('<div id="vg_grid_tmp" style="visibility:hidden;"></div>');
+            $('#vg_grid_tmp').text(response_text);
+//            $('#vg_grid_tmp').width();
+            toLarge.data("_vgwidth", $('#vg_grid_tmp').width());
+            toLarge.data("_vgheight",$('#vg_grid_tmp').height());
+            $('#vg_grid_tmp').remove();
+            toLarge.html(response_text);
             target.vgrefresh();
         }, 500);
-//        }
     };
     function wrapFinishFunction(target,delay){
         var _enlarged = target.find('[data-enlarge="1"]');

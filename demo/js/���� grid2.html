@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Grid Demo</title>
+
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery.easing.min.js"></script>
+    <script type="text/javascript" src="jquery.masonry.js"></script>
+    <script type="text/javascript" src="jquery.textinput.js"></script>
+    <style type="text/css">
+            /*image with no-border*/
+        a img{border:0;}
+
+        body{
+            background-color:#FDFDFD;
+            font-size:12px;
+            color:#333;
+            margin:0;
+            padding:0;
+        }
+        .search_div{
+            padding:20px 30px;
+        }
+        .search_div .search_txt{
+            border:1px solid #aaa;
+            height:25px;
+            line-height:25px;
+            width:200px;
+        }
+        .wrapper{
+            background-color:#FAFAFA;
+            overflow:hidden;
+            margin:20px 30px;
+            border:solid 1px #a35151;
+            text-align:left;
+        }
+        .item{
+            z-index:1;
+            position:relative;
+            margin:10px 10px 0;
+            width:160px;
+            height:160px;
+            display:block;
+            float: left;
+        }
+        .item .tip{
+            position:absolute;
+            top:20px;
+            left:20px;
+            color:white;
+        }
+        .item .loading_tip{
+            position:absolute;
+            top:50px;
+            left:20px;
+            color:white;
+        }
+        .item .icon{
+            cursor: pointer;
+            background-color:#FFFFFF;
+        }
+        .item .icon img{
+            width:160px;
+            height:160px;
+            display:block;
+        }
+        .item .close_ajax{
+            color:white;
+            background-color:#2f96b4;
+            padding:5px;
+        }
+        .item .expandable{
+            display:none;
+        }
+            /**** Transitions ****/
+
+        .masonry,
+        .masonry .masonry-brick {
+            -webkit-transition-duration: 0.7s;
+            -moz-transition-duration: 0.7s;
+            -ms-transition-duration: 0.7s;
+            -o-transition-duration: 0.7s;
+            transition-duration: 0.7s;
+        }
+
+        .masonry {
+            -webkit-transition-property: height, width;
+            -moz-transition-property: height, width;
+            -ms-transition-property: height, width;
+            -o-transition-property: height, width;
+            transition-property: height, width;
+        }
+
+        .masonry .masonry-brick {
+            -webkit-transition-property: left, right, top;
+            -moz-transition-property: left, right, top;
+            -ms-transition-property: left, right, top;
+            -o-transition-property: left, right, top;
+            transition-property: left, right, top;
+        }
+    </style>
+</head>
+<body>
+<div class="search_div">
+    <input type="text" class="search_txt" id="search_bar">
+</div>
+<div class="wrapper" >
+    <ul id="grid-content" class="clearfix">
+        <li data-key="great" class="item">
+            <span class="noexpanded">
+            <a class="js_expand icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            </span>
+            <span class="tip">great</span>
+            <div class="expandable">
+                <span class="simple">
+                    <a class="cunload" href="javascript:;">Close</a>
+                </span>
+                <h2>Title 4</h2>
+                <img src="http://takedesigns.com/wp-content/uploads/2012/09/google-usa.jpg" alt="">
+                <p>Some text...</p>
+            </div>
+        </li>
+        <li data-key="ice"  class="item">
+            <span class="noexpanded">
+            <a class="js_expand icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            </span>
+            <span class="tip">ice</span>
+            <div class="expandable">
+                <span class="simple">
+                    <a class="cunload" href="javascript:;">Close</a>
+                </span>
+                <h2>Title 4</h2>
+                <img src="http://takedesigns.com/wp-content/uploads/2012/09/google-usa.jpg" alt="">
+                <p>Some text...</p>
+            </div>
+        </li>
+        <li data-key="great work"  class="item">
+            <span class="noexpanded">
+            <a class="js_expand icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            </span>
+            <span class="tip">great work</span>
+            <div class="expandable">
+                <span class="simple">
+                    <a class="cunload" href="javascript:;">Close</a>
+                </span>
+                <h2>Title 4</h2>
+                <img src="http://takedesigns.com/wp-content/uploads/2012/09/google-usa.jpg" alt="">
+                <p>Some text...</p>
+            </div>
+        </li>
+        <li data-key="ice age"  class="item">
+            <span class="noexpanded">
+            <a class="js_expand icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            </span>
+            <span class="tip">ice age</span>
+            <div class="expandable">
+                <span class="simple">
+                    <a class="cunload" href="javascript:;">Close</a>
+                </span>
+                <h2>Title 4</h2>
+                <img src="http://takedesigns.com/wp-content/uploads/2012/09/google-usa.jpg" alt="">
+                <p>Some text...</p>
+            </div>
+        </li>
+        <li data-key="great place"  class="item">
+            <span class="noexpanded">
+            <a class="js_expand icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            </span>
+            <span class="tip">great place</span>
+            <div class="expandable">
+                <span class="simple">
+                    <a class="cunload" href="javascript:;">Close</a>
+                </span>
+                <h2>Title 4</h2>
+                <img src="http://takedesigns.com/wp-content/uploads/2012/09/google-usa.jpg" alt="">
+                <p>Some text...</p>
+            </div>
+        </li>
+        <li data-key="ice sea"  class="item">
+            <span class="noexpanded">
+                <a class="js_expand icon" href="javascript:void(0);"><img src="square-purple.png" alt=""></a>
+            </span>
+            <span class="tip">ice sea</span>
+            <div class="expandable">
+                <span class="simple">
+                    <a class="cunload" href="javascript:;">Close</a>
+                </span>
+                <h2>Title 4</h2>
+                <img src="http://takedesigns.com/wp-content/uploads/2012/09/google-usa.jpg" alt="">
+                <p>Some text...</p>
+            </div>
+        </li>
+    </ul>
+
+</div>
+</body>
+<script type="text/javascript">
+    $(function(){
+        var defaultSize = [500, 560]; // expanded box size: width , height. Used for masonry
+
+        var g =  $('#grid-content').masonry({
+            itemSelector: '.item:not(".removed")',
+            isAnimated: true,
+            animationOptions: {
+                duration: 200,
+                easing: 'linear',
+                queue: false
+            }
+        });
+        $('#search_bar').bind('txtinput',function(event){
+            var str = $(this).val();
+            $('#grid-content .item').each(function(){
+                var _self = $(this);
+                var _key = _self.attr('data-key') || '';
+                if (str != '' && _key.indexOf(str) == -1) {
+                    _self.fadeOut().addClass('removed');
+                } else {
+                    _self.fadeIn().removeClass('removed');
+                }
+            });
+            g.masonry('reload');
+        });
+        $('.js_expand').click(function(){
+            var _li = $(this).closest('li');
+            _li.find('.noexpanded').hide();
+            if(!_li.is('.expanded')){
+
+                var _toSize = (_li.attr('data-size')) ? _li.attr('data-size').split(',') : defaultSize;
+                _li.data('def_size',[_li.width(),_li.height()]) // save original size
+                    .animate({"width":_toSize[0],"height":_toSize[1]},function(){
+                        // show hidden content when box has expanded completely
+                        _li.find('.expandable').show('normal');
+                        $('#grid-content').masonry('reload');
+                    });
+                restoreBoxes();
+                $(".item").removeClass("expanded"); //remove the class to all boxes
+                _li.addClass('expanded'); //and add it to the actual one
+
+                //hiding the noexpanded content
+                $('.noexpanded').css('display','block');
+                _li.find('.noexpanded').css('display','none');
+            }
+        });
+    });
+    //closing boxes
+    function restoreBoxes(){
+        var len = $('.expanded').length - 1;
+        $('.expanded').each(function(i){
+            var def_size = $(this).data('def_size');
+            $(this).find('.expandable').hide('slow');
+            $(this).animate({ width: ( def_size[0] || defaultSize[0] ), height: ( def_size[1] || 'auto' )}, function(){
+                if (i >= len) {
+                    $('#grid-content').masonry();
+                }
+            }).removeClass('expanded');
+        })
+    }
+    //close clicking event
+    $('.cunload').click(function(e){
+        e.stopPropagation();
+        restoreBoxes();
+        $(this).closest('li').removeClass("expanded");
+//        $('.overlay-thumb').css('opacity','0');
+        $(' .noexpanded').css('display','block');
+    });
+</script>
+
+<script type="text/template" id="ajax_content">
+    <div style="width:500px;padding:10px; background-color:#efefef;">
+        ajax loaded contents
+        <img src="http://takedesigns.com/wp-content/uploads/2012/09/google-usa.jpg" alt="">
+        <p>ajax loaded contents</p>
+        <span style="cursor: pointer; position: absolute; top: 8px; right: 10px;"><span class="close_ajax">close</span></span>
+        <span style="cursor: pointer; position: absolute; bottom: 10px; right: 8px;"><span class="close_ajax">close</span></span>
+    </div>
+</script>
+</html>
