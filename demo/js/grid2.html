@@ -38,14 +38,14 @@
         .expandable iframe{ margin-bottom:20px }
         .open-content{ position:relative; top:3px; z-index:2; }
 
-        .simple .cunload{ display:block; background:url(http://upload.wikimedia.org/wikipedia/commons/thumb/b/be/JPEG_example_image.jpg/180px-JPEG_example_image.jpg) no-repeat 0 0; width:30px; height:40px; position:absolute; overflow:hidden; right:27px }
+        .simple .cunload{ display:block; color:white; height:40px; position:absolute; overflow:hidden; right:27px }
     </style>
 </head>
 <body>
 <div class="wrap">
     <div class="search_div">
         <input type="text" class="search_txt" id="search_bar">
-        Keys for instant search:<span style="color:gray"> ice, ice age, ice age2, great, great work, great wall</span>
+        <div>Keys for instant search:<span style="color:gray"> ice, ice age, ice age2, great, great work, great wall</span></div>
     </div>
     <ul id="grid">
         <li data-key="ice" class="box">
@@ -53,12 +53,12 @@
             <span class="noexpanded">
                 <div class="overlay-thumb"></div>
                 <a href="javascript:;" class="open-content"><img
-                        src="http://upload.wikimedia.org/wikipedia/commons/thumb/b/be/JPEG_example_image.jpg/180px-JPEG_example_image.jpg"/></a>
+                        src="jpeg_example_image.jpg"/></a>
             </span>
 
                 <div class="expandable">
                 <span class="simple">
-                    <a class="cunload" href="javascript:;"></a>
+                    <a class="cunload" href="javascript:;">Close</a>
                 </span>
 
                     <h2>Title 1</h2>
@@ -75,12 +75,12 @@
             <span class="noexpanded">
                 <div class="overlay-thumb"></div>
                 <a href="javascript:;" class="open-content"><img
-                        src="http://upload.wikimedia.org/wikipedia/commons/thumb/b/be/JPEG_example_image.jpg/180px-JPEG_example_image.jpg"/></a>
+                        src="jpeg_example_image.jpg"/></a>
             </span>
 
                 <div class="expandable">
                 <span class="simple">
-                    <a class="cunload" href="javascript:;"></a>
+                    <a class="cunload" href="javascript:;">Close</a>
                 </span>
 
                     <h2>Title 2</h2>
@@ -97,12 +97,12 @@
             <span class="noexpanded">
                 <div class="overlay-thumb"></div>
                 <a href="javascript:;" class="open-content"><img
-                        src="http://upload.wikimedia.org/wikipedia/commons/thumb/b/be/JPEG_example_image.jpg/180px-JPEG_example_image.jpg"/></a>
+                        src="jpeg_example_image.jpg"/></a>
             </span>
 
                 <div class="expandable">
                 <span class="simple">
-                    <a class="cunload" href="javascript:;"></a>
+                    <a class="cunload" href="javascript:;">Close</a>
                 </span>
 
                     <h2>Title 3</h2>
@@ -119,12 +119,12 @@
             <span class="noexpanded">
                 <div class="overlay-thumb"></div>
                 <a href="javascript:;" class="open-content"><img
-                        src="http://upload.wikimedia.org/wikipedia/commons/thumb/b/be/JPEG_example_image.jpg/180px-JPEG_example_image.jpg"/></a>
+                        src="jpeg_example_image.jpg"/></a>
             </span>
 
                 <div class="expandable">
                 <span class="simple">
-                    <a class="cunload" href="javascript:;"></a>
+                    <a class="cunload" href="javascript:;">Close</a>
                 </span>
 
                     <h2>Title 4</h2>
@@ -140,12 +140,12 @@
             <span class="noexpanded">
                 <div class="overlay-thumb"></div>
                 <a href="javascript:;" class="open-content"><img
-                        src="http://upload.wikimedia.org/wikipedia/commons/thumb/b/be/JPEG_example_image.jpg/180px-JPEG_example_image.jpg"/></a>
+                        src="jpeg_example_image.jpg"/></a>
             </span>
 
                 <div class="expandable">
                 <span class="simple">
-                    <a class="cunload" href="javascript:;"></a>
+                    <a class="cunload" href="javascript:;">Close</a>
                 </span>
 
                     <h2>Title 4</h2>
@@ -161,12 +161,12 @@
             <span class="noexpanded">
                 <div class="overlay-thumb"></div>
                 <a href="javascript:;" class="open-content"><img
-                        src="http://upload.wikimedia.org/wikipedia/commons/thumb/b/be/JPEG_example_image.jpg/180px-JPEG_example_image.jpg"/></a>
+                        src="jpeg_example_image.jpg"/></a>
             </span>
 
                 <div class="expandable">
                 <span class="simple">
-                    <a class="cunload" href="javascript:;"></a>
+                    <a class="cunload" href="javascript:;">Close</a>
                 </span>
 
                     <h2>Title 3</h2>
@@ -195,6 +195,17 @@
             animationOptions: { easing: 'swing', queue: false }
         });
 
+        function scrollTo(){
+            setTimeout(function(){
+                var _top = 0 ;//$('#grid').offset().top;
+                var expandedBox = $('.expanded');
+                if(expandedBox.length > 0){
+                    _top = expandedBox.eq(0).offset().top;
+                }
+                $("html, body").animate({scrollTop: _top}, 500);
+            },600);
+        }
+
 //box clicking event
         $('#grid .box').click(function () {
 
@@ -202,23 +213,22 @@
             var _li = $(this);
             _li.find('.noexpanded').css('display', 'none');
 
-            if (!$(this).is('.expanded')) {
+            if (!_li.is('.expanded')) {
 //                $('.wrap').animate({ minHeight: '620px' }).css('min-height', '620px!important');
-                var size = ($(this).attr('data-size')) ? $(this).attr('data-size').split(',') : defaultSize;
-                $(this)
+                var size = (_li.attr('data-size')) ? _li.attr('data-size').split(',') : defaultSize;
+                _li
                     // save original box size
-                        .data('size', [ $(this).width(), $(this).height() ])
+                        .data('size', [ _li.width(), _li.height() ])
                         .animate({ width: size[0], height: size[1] }, function () {
                             // show hidden content when box has expanded completely
-                            $(this).find('.expandable').show('normal');
-//                            $(this).find('.hideable').hide('normal');
+                            _li.find('.expandable').show('normal');
                             g.masonry();
                         });
 
                 restoreBoxes();
                 $(".box").removeClass("expanded"); //remove the class to all boxes
                 $(this).addClass('expanded'); //and add it to the actual one
-
+                scrollTo();
                 //hiding the noexpanded content
                 $('.noexpanded').css('display', 'block');
                 _li.find(' .noexpanded').css('display', 'none');
@@ -232,10 +242,9 @@
             $('.expanded').each(function (i) {
                 var box = $(this).data('size');
                 $(this).find('.expandable').hide('slow');
-//                $(this).find('.hideable').show('slow');
                 $(this).animate({ width: ( box[0] || defaultSize[0] ), height: ( box[1] || 'auto' )},function () {
                     if (i >= len) {
-                        g.masonry();
+                        g.masonry('reload',scrollTo);
                     }
                 }).removeClass('expanded');
             })
@@ -246,6 +255,7 @@
             e.stopPropagation();
             restoreBoxes();
             $(this).parents(".box").removeClass("expanded");
+            scrollTo();
             $('.overlay-thumb').css('opacity', '0');
             $(' .noexpanded').css('display', 'block');
         });
