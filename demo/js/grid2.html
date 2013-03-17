@@ -245,7 +245,7 @@
                 if(expandedBox.length > 0){
                     _top = expandedBox.eq(0).offset().top;
                 }
-                $("html, body").animate({scrollTop: _top}, 500);
+                $("html, body").animate({scrollTop: _top}, 700);
             },600);
         }
 
@@ -264,6 +264,7 @@
                         .data('size', [ _li.width(), _li.height() ])
                         .animate({ width: size[0], height: size[1] }, function () {
                             // show hidden content when box has expanded completely
+                            // if use ajax load should place loaded contents here inside the div.expandable
                             _li.find('.expandable').show('normal');
                             g.masonry();
                         });
