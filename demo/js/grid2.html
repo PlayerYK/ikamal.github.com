@@ -5,6 +5,7 @@
     <title>Grid Demo</title>
 
     <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="modernizr-transitions.js"></script>
     <script type="text/javascript" src="jquery.easing.min.js"></script>
     <script type="text/javascript" src="jquery.masonry.js"></script>
     <script type="text/javascript" src="jquery.textinput.js"></script>
@@ -40,40 +41,86 @@
 
         .simple .cunload{ display:block; color:white; height:40px; position:absolute; overflow:hidden; right:27px }
 
-        @-webkit-keyframes animateTrans {
-            from {
-                /*transform: rotate(0deg);*/
-                /*-ms-transform: rotate(0deg); *//* IE 9 */
-                /*-webkit-transform: rotate(0deg); *//* Safari and Chrome */
-                /*-o-transform: rotate(0deg); *//* Opera */
-                /*-moz-transform: rotate(0deg); *//* Firefox */
-            }
-            50% {
-                /*transform: rotate(-1deg);*/
-                /*-ms-transform: rotate(-1deg); *//* IE 9 */
-                /*-webkit-transform: rotate(-1deg); *//* Safari and Chrome */
-                /*-o-transform: rotate(-1deg); *//* Opera */
-                /*-moz-transform: rotate(-1deg); *//* Firefox */
+        /**** Transitions ****/
+        .masonry,
+        .masonry .masonry-brick {
+            -webkit-transition-duration: 0.7s;
+            -moz-transition-duration: 0.7s;
+            -ms-transition-duration: 0.7s;
+            -o-transition-duration: 0.7s;
+            transition-duration: 0.7s;
+        }
 
-                transform: scale(.95,.95);
-                -ms-transform: scale(.9,.9); /* IE 9 */
-                -webkit-transform: scale(.95,.95); /* Safari and Chrome */
-                -o-transform: scale(.9,.9); /* Opera */
-                -moz-transform: scale(.9,.9); /* Firefox */
-            }
-            to {
+        .masonry {
+            -webkit-transition-property: height, width;
+            -moz-transition-property: height, width;
+            -ms-transition-property: height, width;
+            -o-transition-property: height, width;
+            transition-property: height, width;
+        }
+
+        .masonry .masonry-brick {
+            -webkit-transition-property: left, right, top;
+            -moz-transition-property: left, right, top;
+            -ms-transition-property: left, right, top;
+            -o-transition-property: left, right, top;
+            transition-property: left, right, top;
+        }
+        
+        /*shaking*/
+        @-webkit-keyframes animateTrans {
+            0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+            10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+            30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+            40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+            50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+            70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+            80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+            90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+            100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+            /*from {*/
                 /*transform: rotate(0deg);*/
-                /*-ms-transform: rotate(0deg); *//* IE 9 */
-                /*-webkit-transform: rotate(0deg); *//* Safari and Chrome */
-                /*-o-transform: rotate(0deg); *//* Opera */
-                /*-moz-transform: rotate(0deg); *//* Firefox */
-            }
+                /*-ms-transform: rotate(0deg); *//**//* IE 9 */
+                /*-webkit-transform: rotate(0deg); *//**//* Safari and Chrome */
+                /*-o-transform: rotate(0deg); *//**//* Opera */
+                /*-moz-transform: rotate(0deg); *//**//* Firefox */
+            /*}*/
+            /*50% {*/
+                /*transform: rotate(-1deg);*/
+                /*-ms-transform: rotate(-1deg); *//**//* IE 9 */
+                /*-webkit-transform: rotate(-1deg); *//**//* Safari and Chrome */
+                /*-o-transform: rotate(-1deg); *//**//* Opera */
+                /*-moz-transform: rotate(-1deg); *//**//* Firefox */
+
+                /*transform: scale(.95,.95);*/
+                /*-ms-transform: scale(.9,.9); *//* IE 9 */
+                /*-webkit-transform: scale(.95,.95); *//* Safari and Chrome */
+                /*-o-transform: scale(.9,.9); *//* Opera */
+                /*-moz-transform: scale(.9,.9); *//* Firefox */
+            /*}*/
+            /*to {*/
+                /*transform: rotate(0deg);*/
+                /*-ms-transform: rotate(0deg); *//**//* IE 9 */
+                /*-webkit-transform: rotate(0deg); *//**//* Safari and Chrome */
+                /*-o-transform: rotate(0deg); *//**//* Opera */
+                /*-moz-transform: rotate(0deg); *//**//* Firefox */
+            /*}*/
         }
         .box:hover {
             animation: animateTrans .5s;
             -moz-animation: animateTrans .5s; /* Firefox */
             -webkit-animation: animateTrans .5s; /* Safari and Chrome */
             -o-animation: animateTrans .5s; /* Opera */
+            
+            animation-delay:.5s;
+            -webkit-animation-delay:.5s; /* Safari and Chrome */
+            
+            animation-iteration-count: infinite;
+            -moz-animation-iteration-count: infinite;
+            -webkit-animation-iteration-count: infinite;
+            -o-animation-iteration-count: infinite;
         }
         .box.expanded{
             animation: none;
@@ -234,7 +281,8 @@
             columnWidth: 1,
             isResizable: true,
             itemSelector: '.box:not(".masonry-removed")',
-            isAnimated: true,
+//            isAnimated: true,
+            isAnimated: !Modernizr.csstransitions,
             animationOptions: { easing: 'swing', queue: false }
         });
 
