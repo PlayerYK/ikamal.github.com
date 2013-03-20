@@ -21,7 +21,7 @@
             line-height:25px;
             width:200px;
         }
-        .box{ float:left; margin:0 15px 15px 0; width:210px; padding:0px; height:140px; background:#000; overflow:hidden; z-index:1;
+        .box{ float:left; margin:0 15px 15px 0; width:210px; padding:0px; height:140px; overflow:hidden; z-index:1;
             -moz-box-shadow:4px 4px 6px #000;
             -webkit-box-shadow:4px 4px 6px #000;
             box-shadow:2px 2px 10px #000 }
@@ -35,11 +35,20 @@
 
         .expandable{ display:none; position:absolute; top:0; z-index:5; padding:0 27px 27px 27px }
         .expandable h2{ font-size:17px; font-weight:bold; margin-bottom:27px; margin-top:26px; color:#ff9a00 }
-        .expandable p{ color:#fff; font-size:14px; line-height:20px; margin-bottom:5px }
+        .expandable p{font-size:14px; line-height:20px; margin-bottom:5px }
         .expandable iframe{ margin-bottom:20px }
         .open-content{ position:relative; top:3px; z-index:2; }
 
-        .simple .cunload{ display:block; color:white; height:40px; position:absolute; overflow:hidden; right:27px }
+        .simple .cunload{
+            background-color:#000000;
+            display:block;
+            color:white;
+            height:40px;
+            padding:0 10px;
+            position:absolute;
+            overflow:hidden;
+            right:27px
+        }
 
         /**** Transitions ****/
         .masonry,
@@ -108,15 +117,16 @@
                 /*-moz-transform: rotate(0deg); *//**//* Firefox */
             /*}*/
         }
-        .box:hover {
+        /*.box:hover {*/
+        .box_shake {
             animation: animateTrans .5s;
             -moz-animation: animateTrans .5s; /* Firefox */
             -webkit-animation: animateTrans .5s; /* Safari and Chrome */
             -o-animation: animateTrans .5s; /* Opera */
             
-            animation-delay:.5s;
-            -webkit-animation-delay:.5s; /* Safari and Chrome */
-            
+            /*animation-delay:.5s;*/
+            /*-webkit-animation-delay:.5s; *//* Safari and Chrome */
+            /**/
             animation-iteration-count: infinite;
             -moz-animation-iteration-count: infinite;
             -webkit-animation-iteration-count: infinite;
@@ -298,12 +308,8 @@
         }
 
 //box clicking event
-        $('#grid .box').click(function () {
-
-            //hiding the noexpanded content
-            var _li = $(this);
+        function box_clicked(_li){
             _li.find('.noexpanded').css('display', 'none');
-
             if (!_li.is('.expanded')) {
 //                $('.wrap').animate({ minHeight: '620px' }).css('min-height', '620px!important');
                 var size = (_li.attr('data-size')) ? _li.attr('data-size').split(',') : defaultSize;
@@ -319,13 +325,46 @@
 
                 restoreBoxes();
                 $(".box").removeClass("expanded"); //remove the class to all boxes
-                $(this).addClass('expanded'); //and add it to the actual one
+                _li.addClass('expanded'); //and add it to the actual one
                 scrollTo();
                 //hiding the noexpanded content
                 $('.noexpanded').css('display', 'block');
                 _li.find(' .noexpanded').css('display', 'none');
 
             }
+        }
+        $('#grid .box').click(function () {
+
+            //hiding the noexpanded content
+            var _li = $(this);
+            _li.addClass('box_shake');
+            setTimeout(function(){
+                _li.removeClass('box_shake');
+                box_clicked(_li);
+            },1000);
+
+//            if (!_li.is('.expanded')) {
+////                $('.wrap').animate({ minHeight: '620px' }).css('min-height', '620px!important');
+//                var size = (_li.attr('data-size')) ? _li.attr('data-size').split(',') : defaultSize;
+//                _li
+//                    // save original box size
+//                        .data('size', [ _li.width(), _li.height() ])
+//                        .animate({ width: size[0], height: size[1] }, function () {
+//                            // show hidden content when box has expanded completely
+//                            // if use ajax load should place loaded contents here inside the div.expandable
+//                            _li.find('.expandable').show('normal');
+//                            g.masonry();
+//                        });
+//
+//                restoreBoxes();
+//                $(".box").removeClass("expanded"); //remove the class to all boxes
+//                $(this).addClass('expanded'); //and add it to the actual one
+//                scrollTo();
+//                //hiding the noexpanded content
+//                $('.noexpanded').css('display', 'block');
+//                _li.find(' .noexpanded').css('display', 'none');
+//
+//            }
         });
 
 //closing boxes
