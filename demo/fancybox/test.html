@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title></title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" type="text/css" href="jquery.fancybox.css?v=2.1.2" media="screen">
+<script type="text/javascript" src="jquery.fancybox.pack_214.js"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+                $(".fancybox").fancybox({autoWidth :'true',autoHeight : 'true', autoResize : 'true' });
+        });
+</script>
+
+
+</head>
+<body>
+<div id="Section1">
+<a href="http://www.youtube.com/watch?v=kcBkz2cO694&autoplay=1" class="fancybox-video"><img border="0" alt="http://" src="images/viewADemo.png"></a><br>
+  <br>
+  <p style="TEXT-ALIGN: justify">Watch an overview of Bodytuner. Here you will find how to manage your clients and your bookings, understand wide ranging results capture &amp; tracking and see how Bodytuner's reporting will help you grow your business and save you time. </p>
+  <br>
+  <script>
+/*fancybox yt video*/
+$(".fancybox-video").click(function() {
+        $.fancybox({
+            'padding' : 0,
+            'type' : 'iframe',
+            'href' : this.href.replace(new RegExp("watch\\?v=", "i"), 'v/'),
+            'swf' : { 'wmode' : 'transparent', 'allowfullscreen' : 'true' }
+        });
+
+        return false;
+});
+</script>
+</div>
+</body>
+</html>
