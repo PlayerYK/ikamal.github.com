@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>Grid Demo</title>
+    <link rel="stylesheet" href="http://onl9workorder.appspot.com/css/form.css"/>
 
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="modernizr-transitions.js"></script>
@@ -24,15 +25,15 @@
             line-height:25px;
             width:200px;
         }
-        .box{ float:left; margin:0 15px 15px 0; width:210px; padding:0px; height:140px; overflow:hidden; z-index:1;
+        .box{ float:left; margin:0 15px 15px 0; width:186px; padding:0px; height:186px; overflow:hidden; z-index:1;
             -moz-box-shadow:4px 4px 6px #000;
             -webkit-box-shadow:4px 4px 6px #000;
             box-shadow:2px 2px 10px #000 }
         .expanded{ z-index:6 }
 
-        .cunload2{ width:204px; height:137px; position:relative; margin:0px 0 0 3px }
+        .cunload2{ position:relative; margin:0px 0 0 3px }
 
-        .overlay-thumb{ position:absolute; background:#000; opacity:0; width:204px; height:134px; z-index:4; top:3px }
+        .overlay-thumb{ position:absolute; background:#000; opacity:0; width:180px; height:180px; z-index:4; top:3px }
         .cunload2:hover{ cursor:pointer }
         .expanded .cunload2:hover{ cursor:auto }
 
@@ -41,8 +42,8 @@
         .expandable p{font-size:14px; line-height:20px; margin-bottom:5px }
         .expandable iframe{ margin-bottom:20px }
         .open-content{ position:relative; top:3px; z-index:2; }
-
-        .simple .cunload{
+        .close_btn{display:none;}
+        .close_btn .cunload{
             background-color:#000000;
             display:block;
             color:white;
@@ -50,7 +51,7 @@
             padding:0 10px;
             position:absolute;
             overflow:hidden;
-            right:27px
+            right:27px;
         }
 
         /**** Transitions ****/
@@ -165,130 +166,94 @@
     <ul id="grid">
         <li data-key="ice" class="box">
             <div class="cunload2">
-            <span class="noexpanded">
-                <div class="overlay-thumb"></div>
-                <a href="javascript:;" class="open-content"><img
-                        src="jpeg_example_image.jpg"/></a>
-            </span>
-
-                <div class="expandable">
-                <span class="simple">
+                <span class="noexpanded">
+                    <div class="overlay-thumb"></div>
+                    <a href="javascript:;" class="open-content"><img
+                            src="jpeg_example_image.jpg"/></a>
+                </span>
+                <span class="close_btn">
                     <a class="cunload" href="javascript:;">Close</a>
                 </span>
+                <div class="expandable">
 
-                    <h2>Title 1</h2>
-                    <iframe src="http://player.vimeo.com/video/20382620?title=0&amp;byline=0&amp;portrait=0" width="601"
-                            height="338" frameborder="0" webkitAllowFullScreen mozallowfullscreen
-                            allowFullScreen></iframe>
-                    <p>Some text...</p>
                 </div>
             </div>
         </li>
 
         <li data-key="great" class="box">
             <div class="cunload2">
-            <span class="noexpanded">
-                <div class="overlay-thumb"></div>
-                <a href="javascript:;" class="open-content"><img
-                        src="jpeg_example_image.jpg"/></a>
-            </span>
-
-                <div class="expandable">
-                <span class="simple">
+                <span class="noexpanded">
+                    <div class="overlay-thumb"></div>
+                    <a href="javascript:;" class="open-content"><img
+                            src="jpeg_example_image.jpg"/></a>
+                </span>
+                <span class="close_btn">
                     <a class="cunload" href="javascript:;">Close</a>
                 </span>
+                <div class="expandable">
 
-                    <h2>Title 2</h2>
-                    <iframe src="http://player.vimeo.com/video/20382620?title=0&amp;byline=0&amp;portrait=0" width="601"
-                            height="338" frameborder="0" webkitAllowFullScreen mozallowfullscreen
-                            allowFullScreen></iframe>
-                    <p>Some text...</p>
                 </div>
             </div>
         </li>
 
         <li data-key="ice age"  class="box">
             <div class="cunload2">
-            <span class="noexpanded">
-                <div class="overlay-thumb"></div>
-                <a href="javascript:;" class="open-content"><img
-                        src="jpeg_example_image.jpg"/></a>
-            </span>
-
-                <div class="expandable">
-                <span class="simple">
+                <span class="noexpanded">
+                    <div class="overlay-thumb"></div>
+                    <a href="javascript:;" class="open-content"><img
+                            src="jpeg_example_image.jpg"/></a>
+                </span>
+                <span class="close_btn">
                     <a class="cunload" href="javascript:;">Close</a>
                 </span>
+                <div class="expandable">
 
-                    <h2>Title 3</h2>
-                    <iframe src="http://player.vimeo.com/video/20382620?title=0&amp;byline=0&amp;portrait=0" width="601"
-                            height="338" frameborder="0" webkitAllowFullScreen mozallowfullscreen
-                            allowFullScreen></iframe>
-                    <p>Some text...</p>
                 </div>
             </div>
         </li>
 
         <li data-key="great work" class="box">
             <div class="cunload2">
-            <span class="noexpanded">
-                <div class="overlay-thumb"></div>
-                <a href="javascript:;" class="open-content"><img
-                        src="jpeg_example_image.jpg"/></a>
-            </span>
-
-                <div class="expandable">
-                <span class="simple">
+                <span class="noexpanded">
+                    <div class="overlay-thumb"></div>
+                    <a href="javascript:;" class="open-content"><img
+                            src="jpeg_example_image.jpg"/></a>
+                </span>
+                <span class="close_btn">
                     <a class="cunload" href="javascript:;">Close</a>
                 </span>
+                <div class="expandable">
 
-                    <h2>Title 4</h2>
-                    <iframe src="http://player.vimeo.com/video/20382620?title=0&amp;byline=0&amp;portrait=0" width="601"
-                            height="338" frameborder="0" webkitAllowFullScreen mozallowfullscreen
-                            allowFullScreen></iframe>
-                    <p>Some text...</p>
                 </div>
             </div>
         </li>
         <li data-key="great wall" class="box">
             <div class="cunload2">
-            <span class="noexpanded">
-                <div class="overlay-thumb"></div>
-                <a href="javascript:;" class="open-content"><img
-                        src="jpeg_example_image.jpg"/></a>
-            </span>
-
-                <div class="expandable">
-                <span class="simple">
+                <span class="noexpanded">
+                    <div class="overlay-thumb"></div>
+                    <a href="javascript:;" class="open-content"><img
+                            src="jpeg_example_image.jpg"/></a>
+                </span>
+                <span class="close_btn">
                     <a class="cunload" href="javascript:;">Close</a>
                 </span>
+                <div class="expandable">
 
-                    <h2>Title 4</h2>
-                    <iframe src="http://player.vimeo.com/video/20382620?title=0&amp;byline=0&amp;portrait=0" width="601"
-                            height="338" frameborder="0" webkitAllowFullScreen mozallowfullscreen
-                            allowFullScreen></iframe>
-                    <p>Some text...</p>
                 </div>
             </div>
         </li>
         <li data-key="ice age2"  class="box">
             <div class="cunload2">
-            <span class="noexpanded">
-                <div class="overlay-thumb"></div>
-                <a href="javascript:;" class="open-content"><img
-                        src="jpeg_example_image.jpg"/></a>
-            </span>
-
-                <div class="expandable">
-                <span class="simple">
+                <span class="noexpanded">
+                    <div class="overlay-thumb"></div>
+                    <a href="javascript:;" class="open-content"><img
+                            src="jpeg_example_image.jpg"/></a>
+                </span>
+                <span class="close_btn">
                     <a class="cunload" href="javascript:;">Close</a>
                 </span>
+                <div class="expandable">
 
-                    <h2>Title 3</h2>
-                    <iframe src="http://player.vimeo.com/video/20382620?title=0&amp;byline=0&amp;portrait=0" width="601"
-                            height="338" frameborder="0" webkitAllowFullScreen mozallowfullscreen
-                            allowFullScreen></iframe>
-                    <p>Some text...</p>
                 </div>
             </div>
         </li>
@@ -334,7 +299,7 @@
                         .animate({ width: size[0], height: size[1] }, function () {
                             // show hidden content when box has expanded completely
                             // if use ajax load should place loaded contents here inside the div.expandable
-                            _li.find('.expandable').show('normal');
+                            _li.find('.expandable, .close_btn').show('normal');
                             g.masonry();
                         });
 
@@ -353,33 +318,14 @@
             //hiding the noexpanded content
             var _li = $(this);
             _li.addClass('box_shake');
-            setTimeout(function(){
-                _li.removeClass('box_shake');
-                box_clicked(_li);
-            },1000);
 
-//            if (!_li.is('.expanded')) {
-////                $('.wrap').animate({ minHeight: '620px' }).css('min-height', '620px!important');
-//                var size = (_li.attr('data-size')) ? _li.attr('data-size').split(',') : defaultSize;
-//                _li
-//                    // save original box size
-//                        .data('size', [ _li.width(), _li.height() ])
-//                        .animate({ width: size[0], height: size[1] }, function () {
-//                            // show hidden content when box has expanded completely
-//                            // if use ajax load should place loaded contents here inside the div.expandable
-//                            _li.find('.expandable').show('normal');
-//                            g.masonry();
-//                        });
-//
-//                restoreBoxes();
-//                $(".box").removeClass("expanded"); //remove the class to all boxes
-//                $(this).addClass('expanded'); //and add it to the actual one
-//                scrollTo();
-//                //hiding the noexpanded content
-//                $('.noexpanded').css('display', 'block');
-//                _li.find(' .noexpanded').css('display', 'none');
-//
-//            }
+            // load form and expand
+//            var ajax_url = "http://onl9workorder.appspot.com/editorderbox.jsp #single-wrap article";
+            var ajax_url = "form.html #single-wrap article";
+            _li.find('.expandable').load(ajax_url,function(responseText, textStatus, XMLHttpRequest){
+                    _li.removeClass('box_shake');
+                    box_clicked(_li);
+                });
         });
 
 //closing boxes
@@ -387,7 +333,7 @@
             var len = $('.expanded').length - 1;
             $('.expanded').each(function (i) {
                 var box = $(this).data('size');
-                $(this).find('.expandable').hide('slow');
+                $(this).find('.expandable, .close_btn').hide('slow');
                 $(this).animate({ width: ( box[0] || defaultSize[0] ), height: ( box[1] || 'auto' )},function () {
                     if (i >= len) {
                         g.masonry('reload',scrollTo);
