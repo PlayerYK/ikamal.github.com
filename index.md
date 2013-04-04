@@ -16,3 +16,4 @@ demo
 
 - [ascii image]({{ BASE_PATH }}/demo/ascii.html)
 - [Qr Code]({{ BASE_PATH }}/demo/qr.html)
+- [Mobile browser detect]({{ BASE_PATH }}/demo/mobile.html)
