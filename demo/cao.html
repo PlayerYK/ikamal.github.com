@@ -26,7 +26,7 @@
 <body>
 <div id="wrapper" class="round">
     <textarea class="round" id="src"></textarea><br/>
-    <input class="round" onclick="javascript:gen2();" type="button" id="Gen" value="Generate"/>
+    <input class="round" onclick="gen2();" type="button" id="Gen" value="Generate"/>
 </div>
 <div id="result" class="round">
 
@@ -38,12 +38,13 @@
 <script type="text/javascript">
     
     var button = document.getElementById('Gen');
-    var result = document.getElementById('result');
-    var text = document.getElementById('src').value;
     
     function gen2(){
+        var result = document.getElementById('result');
+        var text = document.getElementById('src').value;
         var arr = text.split('');
         result.innerHTML = gen(arr,2)+"<br>"+gen(arr,3);
+        return false;
     }
     function gen(arr,len){
         var resultArr = [];
