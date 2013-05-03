@@ -262,7 +262,7 @@ cube.zoomOut = function(obj, obj2) {
 //        });
 };
 
-// 生成多位数组的方法，默认值都填写为0
+// 生成多维数组的方法，默认值都填写为0
 function multidimensionalArray(){
     var args = Array.prototype.slice.call(arguments);
 

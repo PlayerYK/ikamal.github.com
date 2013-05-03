@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>排列组合-for cao</title>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <style type="text/css">
+        body{ text-align:center; margin:0; padding:20px 0; font-family:Helvetica, Arial, sans-serif; color:#333; text-shadow:0 1px 0 white; background:#F9F9F9; -webkit-text-size-adjust:none; -ms-text-size-adjust:none; -webkit-tap-highlight-color:rgba(0, 0, 0, 0); }
+        .round{ border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px; }
+        #wrapper{ margin:0 auto; text-align:left; width:600px; border:1px solid #AAA; background-color:white; padding:20px; }
+        .title{ background-color:#1C1C1C; color:#D0D0D0; font:16px Monaco, monospace !important; margin-bottom:30px; padding:15px; }
+        #src{ border:solid 1px #BBB; width:580px; padding:10px; height:100px; }
+        #Gen{ color:white; font-weight:bold; cursor:pointer; border:none; font-size:18px; padding:11px 48px 13px; background-color:#5B8737; }
+        #Gen:hover, #Gen:focus{ background-color:#699C40; }
+        #qrcode{ width:310px; }
+        .block,
+        .footer{ padding:10px; border:#CCC 1px solid; margin:20px 0; font-size:12px; color:#666; }
+        .footer{ background:#EFEFEF; position:fixed;bottom:20px;left:20px;}
+        a{ color:#666; text-decoration:none; }
+        a:hover{ text-decoration:underline; }
+        #vcard{ display:none; }
+        #vcard label{ width:120px; text-align:right; float:left; }
+        #vcard input{ margin-left:10px; }
+        
+        #result{margin:20px auto;width:800px;text-align:left;padding:30px;}
+    </style>
+</head>
+<body>
+<div id="wrapper" class="round">
+    <textarea class="round" id="src"></textarea><br/>
+    <input class="round" type="button" id="Gen" value="Generate"/>
+</div>
+<div id="result" class="round">
+
+</div>
+
+<div class="footer round">
+    2013 &copy; <a href="http://jslab.pro/">jsLab.pro</a>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#Gen').click(function(){
+            var arr = $('#src').val().split('');            
+            $('#result').html(gen(arr,2)+"<br>"+gen(arr,3));
+        });
+    });
+    
+    function gen(arr,len){
+        var resultArr = [];
+        resultArr = base.P(arr,len);
+        var len = resultArr.length;
+        var str = "";
+        for(var i = 0;i<len;i++){
+            str += resultArr[i].join("") + "; ";
+        }
+        return str;
+    }
+
+    var base = {};
+    //组合
+    base.C = function(arr, num){
+        var r=[];
+        (function f(t,a,n){
+            if (n==0) return r.push(t);
+            for (var i=0,l=a.length; i<=l-n; i++){
+                f(t.concat(a[i]), a.slice(i+1), n-1);
+            }
+        })([],arr,num);
+        return r;
+    };
+    //排列
+    base.P = function(arr, num){
+        var r=[];
+        (function f(t,a,n){
+            if (n==0) return r.push(t);
+            for (var i=0,l=a.length; i<l; i++){
+                f(t.concat(a[i]), a.slice(0,i).concat(a.slice(i+1)), n-1);
+            }
+        })([],arr,num);
+        return r;
+    }
+</script>
+</body>
+</html>
