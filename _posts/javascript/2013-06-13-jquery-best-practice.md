@@ -24,7 +24,6 @@ title : jQuery最佳实践若干
 			return rootjQuery.ready( selector );
 		}
 
-
 1. $()这个函数可以当成入口，执行初始化的操作，其他函数都移到外面。  
 最后只剩下类似 `validateLogin();` 、 `$("#btn").click(check);` 这样的调用。  
 ajax方法也类似，success()中定义的匿名方法不方便调试和修改。
