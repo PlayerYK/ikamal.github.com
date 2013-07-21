@@ -1,0 +1,262 @@
+@import "reset.css";
+
+@pageBg:#F3F3F4;
+@titleColor:#000000;
+@textColor:#6C6C6C;
+@hiLightColor:#EE3324;
+@lightBorderColor:#EFEFEF;
+
+@pageWidth:940px;
+@spriteUrl:url(../img/tondo_sprite.png);
+
+.right{float:right;}
+.left{float:left;}
+.it{font-style: italic;}
+.al_right{text-align:right;}
+.red{color:@hiLightColor;}
+.clear:before, .clear:after {content: "\0020"; display: block; height: 0; visibility: hidden;}
+.clear:after { clear: both; }
+.clear { zoom: 1; }
+a{color:@textColor;text-decoration:none;&:hover{color:@hiLightColor;text-decoration:underline;}}
+
+.inline-block{
+  display:inline-block;
+  *display:inline;
+  zoom:1;
+  vertical-align: middle;
+}
+.dot{
+  .inline-block;
+  width:20px;
+  height:20px;
+  background:transparent @spriteUrl repeat-x -50px -20px scroll;
+  .cur &{
+    background-position:-50px 0;
+  }
+}
+.back_icon{
+  .inline-block;
+  width:45px;
+  height:45px;
+  background:transparent @spriteUrl no-repeat 0 0 scroll;
+
+
+}
+html{
+  overflow-y:scroll;
+}
+body{
+  color:@textColor;
+  background-color:@pageBg;
+  font-family: 'helvetica neue middle', Arial;
+  text-align:center;
+}
+#wrapper{
+  width:@pageWidth;
+  margin:0 auto;
+  text-align:left;
+}
+#menu{
+  text-align:center;
+  padding:80px 0;
+  overflow:hidden;
+
+  a{
+    letter-spacing:5px;
+    font-family: 'AvantGardeITCbyBT Demi', Arial;
+    color:@titleColor;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:bold;
+    margin:0 15px 0;
+    vertical-align:middle;
+
+    &:hover,&.cur{
+      border-bottom:solid 2px @hiLightColor;
+    }
+    &.logo{
+      display:inline-block;
+      text-align:center;
+      border:0 none;
+      width:320px;
+      height:130px;
+      margin:0 50px;
+      img{
+        display:block;
+      }
+    }
+  }
+}
+#sub_menu{
+  text-align:center;
+  padding:25px 0;
+  font-size:14px;
+  color:@titleColor;
+  a{
+    letter-spacing:5px;
+    font-family: 'AvantGardeITCbyBT Demi', Arial;
+    color:@titleColor;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:bold;
+    margin:0 10px 0;
+    &:hover,&.cur{
+      border-bottom:solid 2px @hiLightColor;
+    }
+  }
+}
+#con{
+  .banner{
+    width:@pageWidth;
+    height:320px;
+    overflow:hidden;
+  }
+  .sep{
+    width:100%;
+    height:20px;
+    background:transparent @spriteUrl repeat-x -1px -70px scroll;
+  }
+  .slide_img{
+    width:@pageWidth;
+    height:289px;
+    overflow:hidden;
+  }
+  .slide_nav{
+    float:right;
+    background-color:@pageBg;
+    cursor:pointer;
+    li{
+      float:left;
+      margin:0 10px;
+    }
+  }
+}
+
+.contact_con{
+  width:@pageWidth;
+  padding:30px 0;
+  line-height:2em;
+  .left_1{
+    .left;
+    padding-right:50px;
+  }
+  h3{
+    color:@titleColor;
+  }
+}
+
+.about_con{
+  padding-bottom:50px;
+  font-size:14px;
+  img{
+    display:block;
+  }
+  h2{
+    line-height:80px;
+    text-align:center;
+  }
+  .block_2,.block_3{
+    margin:50px 0;
+  }
+  .left,.right{
+    width:49%;
+  }
+  .block_1{
+    height:225px;
+    .right{
+      position:relative;
+      height:225px;
+      .b_1{
+        position:absolute;
+        bottom:0;
+        left:0;
+      }
+      .b_2{
+        position:absolute;
+        bottom:0;
+        right:0;
+      }
+    }
+  }
+}
+
+.music_con{
+  padding-top:30px;
+  .board{
+    float:left;
+    color:@titleColor;
+    width:268px;
+    background-color:white;
+    padding:15px;
+    margin-bottom:20px;
+    border:solid 1px @lightBorderColor;
+    .title{
+      font-size:14px;
+      font-weight:bold;
+      color:@titleColor;
+      &:hover{
+        color:@hiLightColor;
+      }
+    }
+    p{
+      margin:25px 0;
+    }
+  }
+}
+
+.music_detail_con{
+  width:780px;
+  padding:40px 80px;
+  background-color:white;
+  .header{
+    width:100%;
+    height:45px;
+    margin-bottom:25px;
+    position:relative;
+    h1{
+      color:@hiLightColor;
+      font-size:20px;
+      line-height:45px;
+      font-weight:bold;
+    }
+    .back{
+      position:absolute;
+      right:0;
+      top:0;
+    }
+  }
+  .poster{
+    float:left;
+    margin:0 20px 10px 0;
+  }
+  .block{
+    margin-bottom:30px;
+  }
+  .music_player{
+    width:480px;
+    padding:20px;
+
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border:solid 1px #000000;
+
+    -moz-box-shadow: 0px 0px 5px #000000;
+    -webkit-box-shadow: 0px 0px 5px #000000;
+    box-shadow: 0px 0px 5px #000000;
+
+    background: #6c7077; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzZjNzA3NyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjU3JSIgc3RvcC1jb2xvcj0iIzRmNTI1NyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMzZTQwNDQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #6c7077 0%, #4f5257 57%, #3e4044 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6c7077), color-stop(57%,#4f5257), color-stop(100%,#3e4044)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #6c7077 0%,#4f5257 57%,#3e4044 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #6c7077 0%,#4f5257 57%,#3e4044 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #6c7077 0%,#4f5257 57%,#3e4044 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #6c7077 0%,#4f5257 57%,#3e4044 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6c7077', endColorstr='#3e4044',GradientType=0 ); /* IE6-8 */
+
+  }
+}
+
+
