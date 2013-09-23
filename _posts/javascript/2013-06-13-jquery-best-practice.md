@@ -14,6 +14,7 @@ title : jQuery最佳实践若干
         <!-- Grab Google CDN jQuery. fall back to local if necessary -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script>!window.jQuery && document.write('<script src="js/jquery-1.8.3.min.js">\x3C/script>')</script>
+        内网：<script src="http://static.paipaiimg.com/qqbuy/js/lib/jquery-1.8.3.min.js" type="text/javascript">
 1. `$(document).ready(function() {...})` 可以改成 `$(function() {...})`   
 源码:
 
@@ -167,3 +168,4 @@ jQuery.noConflict()：
 1. 如何做到 jQuery-free？ http://www.ruanyifeng.com/blog/2013/05/jquery-free.html
 1. jQuery best practices http://net.tutsplus.com/tutorials/javascript-ajax/14-helpful-jquery-tricks-notes-and-best-practices/
 1. Drupal jQuery best practices https://drupal.org/node/1720586
+1. querySelectorAll https://developer.mozilla.org/en-US/docs/Web/API/Document.querySelectorAll
